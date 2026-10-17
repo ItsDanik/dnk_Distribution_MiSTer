@@ -1,0 +1,19 @@
+# The games of the ports in the database, for the launcher's screen:
+# <Engine>|<Game>|<title>. Made by launcher/distribution.py of Hybrid_MiSTer.
+Dethrace|CARMA|Carmageddon
+Dethrace|SPLAT|Carmageddon: Splat Pack
+ECWolf|WL|Wolfenstein 3D
+ECWolf|SOD|Spear of Destiny
+ECWolf|SD2|SoD: Return to Danger
+ECWolf|SD3|SoD: Ultimate Challenge
+jfSW|SW|Shadow Warrior
+jfSW|WT|SW: Wanton Destruction
+jfSW|TD|SW: Twin Dragon
+OpenScreamer|S1|Screamer
+OpenScreamer|S2|Screamer 2
+Xash3D|HL|Half-Life
+Xash3D|OF|HL: Opposing Force
+Xash3D|BS|HL: Blue Shift
+YQuake2|Q2|Quake II
+YQuake2|RK|Q2: The Reckoning
+YQuake2|GZ|Q2: Ground Zero
