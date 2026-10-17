@@ -41,6 +41,9 @@
 #        danik_hybrid_ports.sh takeover   set up without the screen (what version 3 of
 #                                         danik_hybrid_cores.sh runs when it hands over)
 #        danik_hybrid_ports.sh status
+#        danik_hybrid_ports.sh download <ports>
+#                                         what Apply runs: Downloader, then the
+#                                         folder each new port's game files go in
 #
 # Choosing the ports: a screen with a tickbox for each port and each of its
 # games the database has (the catalogue below), and the launcher on or off. The ports come
@@ -79,7 +82,7 @@
 # under the terms of the GNU General Public License as published by the Free
 # Software Foundation, version 3 of the License.
 
-VERSION=4
+VERSION=5
 SELF=$(readlink -f "$0")
 # DANIK_HYBRID_ROOT and DANIK_HYBRID_TMP: another SD card and /tmp, for testing
 ROOT=${DANIK_HYBRID_ROOT:-/media/fat}
@@ -643,24 +646,44 @@ apply() {
         echo "Moving the files of ports installed before, a moment..."
         lock_moves wait
     fi
-    updater=$ROOT/Scripts/update.sh
-    if [ ! -f "$updater" ]; then
-        updater=
-    fi
+    # shellcheck disable=SC2046  # a word each
     if [ -x "$ui" ] && "$ui" probe $UI_ARGS; then
-        if [ -n "$updater" ]; then
-            "$ui" run $UI_ARGS -- bash "$updater" --run-only "$DB_ID"
-        else
-            "$ui" run $UI_ARGS -- sh -c 'echo "Scripts/update.sh is not there. Run update_all to install and remove the ports."; exit 1'
-        fi
-    elif [ -n "$updater" ]; then
-        bash "$updater" --run-only "$DB_ID"
+        "$ui" run $UI_ARGS -- bash "$SELF" download $(installed_ports; old_ports)
     else
-        echo "Scripts/update.sh is not there. Run update_all to install and remove the ports."
+        bash "$SELF" download $(installed_ports; old_ports)
     fi
     # what came is moved in at once
     migrate_all
     unlock_moves
+}
+
+# Downloader for this database alone. Then, for each port it brought that
+# was not there before (the ports there were: the arguments), where the
+# player's own game files go: the game's data is not in the database, and
+# its README.txt in that folder says which files.
+download() {
+    local updater=$ROOT/Scripts/update.sh code engine titles said=
+    if [ ! -f "$updater" ]; then
+        echo "Scripts/update.sh is not there. Run update_all to install and remove the ports."
+        return 1
+    fi
+    bash "$updater" --run-only "$DB_ID"
+    code=$?
+    for engine in $(installed_ports); do
+        case " $* " in *" $engine "*) continue ;; esac
+        # its games that have a menu entry now (a port of one game: its one),
+        # in the 22 columns the screen has left: else the first, +how many more
+        titles=$(catalogue | tr -d '\r' | awk -F '|' -v e="$engine" -v sets=" $(sets_of "$engine" | tr '\n' ' ') " '
+            $1 == e { if (first == "") first = $3; if (index(sets, " " e "_" $2 " ")) { t[++n] = $3; out = out (n > 1 ? ", " : "") $3 } }
+            END { if (n == 0) print first; else if (length(out) <= 22) print out; else print t[1] " +" (n - 1) }')
+        if [ -z "$said" ]; then
+            echo
+            echo "Copy your own game files to (see README.txt):"
+            said=1
+        fi
+        printf '  %-24s%s\n' "games/dnk/$engine/" "${titles:-$engine}"
+    done
+    return $code
 }
 
 configure() {
@@ -794,6 +817,10 @@ main() {
             ;;
         config)
             configure
+            ;;
+        download)
+            shift
+            download "$@"
             ;;
         takeover)
             # as the first run, without the screen

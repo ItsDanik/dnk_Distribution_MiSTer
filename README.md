@@ -9,7 +9,18 @@ controls.
 2. Run update_all. It installs the launcher, danik_hybrid_ports, in Scripts.
 3. Run danik_hybrid_ports from the Scripts menu, tick the games you want and press X: Apply.
 
-The game data is not included: each port's README says which files of your own copy go where.
+The game data is not included: copy the files from your own copy of each game into its port's folder on
+the SD card. Each port's README.txt, which comes with it into that folder, says which files go where;
+without them, the game says so when it is loaded.
+
+| Games | Your game files go in | Which files |
+|---|---|---|
+| Carmageddon, Carmageddon: Splat Pack | `/media/fat/games/dnk/Dethrace/` | [README.txt](files/games/dnk/Dethrace/README.txt) |
+| Wolfenstein 3D, Spear of Destiny, SoD: Return to Danger, SoD: Ultimate Challenge | `/media/fat/games/dnk/ECWolf/` | [README.txt](files/games/dnk/ECWolf/README.txt) |
+| Shadow Warrior, SW: Wanton Destruction, SW: Twin Dragon | `/media/fat/games/dnk/jfSW/` | [README.txt](files/games/dnk/jfSW/README.txt) |
+| Screamer, Screamer 2 | `/media/fat/games/dnk/OpenScreamer/` | [README.txt](files/games/dnk/OpenScreamer/README.txt) |
+| Half-Life, HL: Opposing Force, HL: Blue Shift | `/media/fat/games/dnk/Xash3D/` | [README.txt](files/games/dnk/Xash3D/README.txt) |
+| Quake II, Q2: The Reckoning, Q2: Ground Zero | `/media/fat/games/dnk/YQuake2/` | [README.txt](files/games/dnk/YQuake2/README.txt) |
 
 `ports.txt` lists the ports in the database; `files/` is what it installs. Published with
 `launcher/distribution.py` of Hybrid_MiSTer; the database itself is on the `db` branch.
