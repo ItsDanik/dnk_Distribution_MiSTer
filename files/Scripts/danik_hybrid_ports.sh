@@ -79,7 +79,7 @@
 # under the terms of the GNU General Public License as published by the Free
 # Software Foundation, version 3 of the License.
 
-VERSION=3
+VERSION=4
 SELF=$(readlink -f "$0")
 # DANIK_HYBRID_ROOT and DANIK_HYBRID_TMP: another SD card and /tmp, for testing
 ROOT=${DANIK_HYBRID_ROOT:-/media/fat}
@@ -234,39 +234,81 @@ old_ports() {
 #     folders of its first versions) into games/dnk/DXXRebirth/, their
 #     missions into descent/missions/ and descent2/missions/ there
 # Nothing else is touched: a folder without our launch script is not ours.
+#
+# One process moves at a time (lock_moves): the screen holds the lock from
+# before it runs Downloader until it has moved what came, and the daemon
+# leaves it alone while the lock is held or Downloader runs by itself
+# (update_all). Two moving the same folder side by side each moved half of
+# it, and the other printed "cannot stat" for every file (version 3).
 
-# Moves the files of `from` into `to`, the same paths; where `to` has a file
-# already, the one of `from` goes. Empty folders of `from` go.
-merge_into() {
-    local from=$1 to=$2 f rel
-    [ -d "$from" ] || return 0
-    mkdir -p "$to" || return 1
-    while IFS= read -r -d '' f; do
-        rel=${f#"$from"/}
-        if [ -e "$to/$rel" ] || [ -L "$to/$rel" ]; then
-            rm -f "$f"
-        else
-            mkdir -p "$(dirname "$to/$rel")" && mv -f "$f" "$to/$rel"
+MOVING=$TMP/danik_hybrid_ports.moving
+MOVES_LOCKED=
+
+# Takes the lock; true if this process holds it. With "wait" it waits for
+# another process to finish, else it gives up at once. A lock whose process
+# is gone is taken over.
+lock_moves() {
+    local pid
+    [ -n "$MOVES_LOCKED" ] && return 0
+    while ! mkdir "$MOVING" 2>/dev/null; do
+        pid=$(cat "$MOVING/pid" 2>/dev/null)
+        if { [ -n "$pid" ] && ! kill -0 "$pid" 2>/dev/null; } ||
+           { [ -z "$pid" ] && [ $(($(date +%s) - $(stat -c %Y "$MOVING" 2>/dev/null || date +%s))) -gt 10 ]; }; then
+            rm -rf "$MOVING"
+            continue
         fi
-    done < <(find "$from" \( -type f -o -type l \) -print0)
-    find "$from" -depth -type d -empty -delete 2>/dev/null
+        [ "$1" = wait ] || return 1
+        sleep 1
+    done
+    echo $$ > "$MOVING/pid"
+    MOVES_LOCKED=1
 }
 
-# Like merge_into, but a file `to` has already stays where it was in `from`:
-# for data that is the player's on both sides
-merge_keep() {
-    local from=$1 to=$2 f rel
+unlock_moves() {
+    [ -n "$MOVES_LOCKED" ] || return 0
+    rm -rf "$MOVING"
+    MOVES_LOCKED=
+}
+
+# Downloader or update_all running, as a process
+updating() {
+    grep -qsE 'download[e]r|update_al[l]|Scripts/updat[e]\.sh' /proc/[0-9]*/cmdline
+}
+
+# Moves what `from` holds into `to`, the same paths. A folder `to` does not
+# have goes over whole (one rename, however many files are in it); one it has
+# is merged the same way. Where `to` has a file already: with "drop" the one
+# of `from` goes (a file of the port, the new one stays), with "keep" it stays
+# where it was (data that is the player's on both sides). A folder against a
+# file is left as it is. `from` goes when it is empty then.
+merge_tree() {
+    local from=$1 to=$2 how=$3 e name
     [ -d "$from" ] || return 0
     mkdir -p "$to" || return 1
-    while IFS= read -r -d '' f; do
-        rel=${f#"$from"/}
-        if [ -e "$to/$rel" ] || [ -L "$to/$rel" ]; then
-            note "  kept $f: games/dnk has a $rel already"
+    while IFS= read -r -d '' e; do
+        name=${e##*/}
+        if [ -d "$e" ] && [ ! -L "$e" ] && [ -d "$to/$name" ] && [ ! -L "$to/$name" ]; then
+            merge_tree "$e" "$to/$name" "$how"
+        elif [ ! -e "$to/$name" ] && [ ! -L "$to/$name" ]; then
+            mv -f "$e" "$to/$name"
+        elif { [ -d "$e" ] && [ ! -L "$e" ]; } || [ -d "$to/$name" ]; then
+            note "  kept $e: $to/$name is there already"
+        elif [ "$how" = keep ]; then
+            note "  kept $e: games/dnk has a ${to#"$DNK"/}/$name already"
         else
-            mkdir -p "$(dirname "$to/$rel")" && mv -f "$f" "$to/$rel"
+            rm -f "$e"
         fi
-    done < <(find "$from" \( -type f -o -type l \) -print0)
-    find "$from" -depth -type d -empty -delete 2>/dev/null
+    done < <(find "$from" -mindepth 1 -maxdepth 1 -print0)
+    rmdir "$from" 2>/dev/null
+    return 0
+}
+
+merge_into() {
+    merge_tree "$1" "$2" drop
+}
+
+merge_keep() {
+    merge_tree "$1" "$2" keep
 }
 
 # the set names of an engine's menu entries: <setname>s of the MGLs that load
@@ -327,8 +369,14 @@ migrate_port() {
 }
 
 # Every port of the old layout whose new files are there. True if one moved.
+# With "wait" it waits while another process moves; else it moves nothing
+# then.
 migrate_all() {
-    local engine new f moved=1
+    local engine new f moved=1 mine=
+    if [ -z "$MOVES_LOCKED" ]; then
+        lock_moves "$1" || return 1
+        mine=1
+    fi
     for engine in $(old_ports); do
         new=
         for f in "$OTHER/dnk/dnk-$engine"_*.rbf; do
@@ -343,6 +391,7 @@ migrate_all() {
         dxx_folders
         moved=0
     fi
+    [ -n "$mine" ] && unlock_moves
     return $moved
 }
 
@@ -373,7 +422,7 @@ run_daemon() {
     local cur stamp self_stamp tick changed
 
     echo $$ > "$PIDFILE"
-    trap 'stop_child; rm -f "$PIDFILE"; exit 0' TERM INT
+    trap 'stop_child; unlock_moves; rm -f "$PIDFILE"; exit 0' TERM INT
     [ "$(wc -c < "$LOG" 2>/dev/null || echo 0)" -gt 200000 ] && mv -f "$LOG" "$LOG.prev"
     log "daemon started (version $VERSION, pid $$), ports: $(installed_ports | tr '\n' ' ')$(old_ports | sed 's/^/ (old) /' | tr '\n' ' ')"
     self_stamp=$(stat -c %Y "$SELF" 2>/dev/null)
@@ -408,13 +457,14 @@ run_daemon() {
         fi
 
         # Between games (a port that is still loaded would be started again):
-        # ports of the old layout whose new files have come, every 10 seconds;
+        # ports of the old layout whose new files have come, every 10 seconds
+        # (not while Downloader runs, nor while the screen moves them);
         # a newer version of this file, which can have been installed over
         # this file or have come with a port; an older file installed over
         # this one is replaced by the newest copy the same way.
         if [ -z "$CHILD" ] && ! launcher_of "$CORE"; then
             tick=$((tick + 1))
-            [ $((tick % 20)) -eq 1 ] && migrate_all
+            [ $((tick % 20)) -eq 1 ] && ! updating && migrate_all
             changed=
             [ "$(stat -c %Y "$SELF" 2>/dev/null)" != "$self_stamp" ] && changed=1
             if [ -n "$changed" ] || [ $((tick % 20)) -eq 0 ]; then
@@ -588,6 +638,11 @@ apply() {
     filter=$(filter_of "$out")
     write_section "$filter"
     note "$(basename "$DROP_IN"): filter = $filter"
+    # the daemon moves nothing from here until what came has been moved below
+    if ! lock_moves; then
+        echo "Moving the files of ports installed before, a moment..."
+        lock_moves wait
+    fi
     updater=$ROOT/Scripts/update.sh
     if [ ! -f "$updater" ]; then
         updater=
@@ -605,6 +660,7 @@ apply() {
     fi
     # what came is moved in at once
     migrate_all
+    unlock_moves
 }
 
 configure() {
@@ -717,7 +773,7 @@ main() {
             echo "Hybrid ports no longer start their games."
             ;;
         migrate)
-            migrate_all || echo "Nothing to move."
+            migrate_all wait || echo "Nothing to move."
             ;;
         status)
             status
@@ -731,7 +787,7 @@ main() {
                 : # the daemon switches to the new file by itself after the game
             else
                 stop_daemon
-                migrate_all
+                migrate_all wait
             fi
             start_daemon
             configure
@@ -747,7 +803,7 @@ main() {
                 :
             else
                 stop_daemon
-                migrate_all
+                migrate_all wait
             fi
             start_daemon
             ;;
