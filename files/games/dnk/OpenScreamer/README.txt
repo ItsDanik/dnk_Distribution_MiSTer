@@ -33,22 +33,22 @@ Install
      (with which update_all keeps the ports up to date from then on).
   2. Run danik_hybrid_ports from the Scripts menu, if you have not done so
      before (see Requirements).
-  Then the games' files, as they are (nothing has to be unpacked; upper or
-  lower case does not matter):
-  - Screamer: its DATA, GFX and CONFIG folders to
-    /media/fat/games/dnk/OpenScreamer/screamer/ (so that there is
-    .../screamer/DATA/GEN.DAT, .../screamer/GFX/GAME.DAT and so on). From
-    GFX the six MAP1H.DAT .. MAP6H.DAT are not used. CONFIG is optional: if
-    CONFIG/CONTROLS.CFG is there, its keyboard keys are used. If you had
-    the first release, your folders straight in the game's folder (DATA,
-    GFX, CONFIG) keep working there.
-  - Screamer 2: its DATA, GFX, ANIMS and CONFIG folders to
-    /media/fat/games/dnk/OpenScreamer/screamer2/. Of GFX and ANIMS only the
-    256-colour files are used, those whose names end in 1 (GAME1.DAT,
-    MAP1L01.DAT, CARS101.DAT ...). Its music is the CD's audio tracks: as
-    files in screamer2/music/, named track_02.ogg .. track_09.ogg (.mp3 or
-    .wav do as well; track 2 is the menu's, 3 to 9 the races'). Without
-    them Screamer 2 has no music.
+  Then the games' files: copy EVERYTHING in each game's folder (the one
+  that holds DATA and GFX), with all its folders as they are, and leave
+  nothing out. Nothing has to be unpacked; upper or lower case does not
+  matter. Files the port does not use (the .EXEs, the sound drivers) do no
+  harm.
+  - Screamer: to /media/fat/games/dnk/OpenScreamer/screamer/ (so that
+    there is .../screamer/DATA/GEN.DAT, .../screamer/GFX/GAME.DAT and so
+    on). If CONFIG/CONTROLS.CFG is there, its keyboard keys are used. If
+    you had the first release, your folders straight in the game's folder
+    (DATA, GFX, CONFIG) keep working there.
+  - Screamer 2: to /media/fat/games/dnk/OpenScreamer/screamer2/ (so that
+    there is .../screamer2/DATA/GEN.DAT, .../screamer2/GFX/GAME1.DAT,
+    .../screamer2/ANIMS/SCENE011.DAT and so on). Its music is the CD's
+    audio tracks: as files in screamer2/music/, named track_02.ogg ..
+    track_09.ogg (.mp3 or .wav do as well; track 2 is the menu's, 3 to 9
+    the races'). Without them Screamer 2 has no music.
   Load the game from the Other menu: dnk-Screamer or dnk-Screamer 2.
 
 When a game's files are missing, the core says which files to copy where;
