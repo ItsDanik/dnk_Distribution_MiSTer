@@ -31,7 +31,10 @@ Install
   1. Extract the zip to the root of the SD card (/media/fat): _Other/,
      games/dnk/jfSW/, Scripts/ and downloader_danik_hybrid_ports.ini
      (with which update_all keeps the ports up to date from then on).
-  2. Copy the game data to /media/fat/games/dnk/jfSW/
+  2. Copy EVERYTHING in the game's folder (the one with SW.GRP) to
+     /media/fat/games/dnk/jfSW/, with its folders as they are, and leave
+     nothing out (files the port does not use do no harm). The port finds
+     in it:
        SW.GRP
        Track02.ogg ... Track14.ogg, the music (the audio of the game's
          CD), there or in a folder "music". Without them the full
@@ -44,6 +47,10 @@ Install
   3. Run danik_hybrid_ports from the Scripts menu, if you have not done so
      before (see Requirements).
   4. Load the game from the Other menu, e.g. dnk-Shadow Warrior.
+  The game data can go on a USB drive instead, into the same folder there
+  (/media/usb0/games/dnk/jfSW/): the game looks for it there first, and
+  then keeps its settings and saved games there as well. Everything else
+  stays on the SD card.
 
 The game files are known by their contents, whatever their names. The menu
 entry of Shadow Warrior starts the shareware when the full game is not
@@ -99,10 +106,6 @@ OSD options
                 keys, once each time it is selected. Next Level: the level
                 counts as completed, as at its exit, and the next one
                 starts (not on the last level).
-  Menu OK, Menu Back
-                the gamepad button that confirms / goes back in the game's
-                menus, whatever it does in the game. MiSTer (default) uses
-                the OK/Back buttons of your MiSTer menu.
 
 Controls
   Keyboard and mouse:
@@ -140,11 +143,14 @@ Controls
     X (Xbox Y / PlayStation Triangle)   Use the inventory item
     Select                              Map
     Start                               Menu
+  In the game's menus the buttons that confirm and go back are the ones of
+  your MiSTer menu, whatever they do in the game: its Menu OK / Menu Back if
+  you set them in "Define joystick buttons", else its A / B. A controller
+  never set up in MiSTer confirms and goes back as on its console: Cross /
+  Circle on PlayStation, A / B on Xbox and on Nintendo.
   Change the buttons in the OSD under "Define jfSW buttons". "Menu OK" and
-  "Menu Back" there are only needed for a button without a game function;
-  MiSTer doesn't let you assign a button twice, so to confirm with a button
-  that also has a game function, pick it in the OSD's Menu OK/Menu Back
-  options instead.
+  "Menu Back" there are only needed for a spare button without a game
+  function. While the OSD is open, the game gets no input.
   Naming a saved game without a keyboard: up/down changes the last
   letter, right adds a letter, left removes one, Menu OK confirms.
 
@@ -161,6 +167,7 @@ Music
 Files
   /media/fat/games/dnk/jfSW/sw.cfg      settings
   /media/fat/games/dnk/jfSW/game*.sav    saved games
+      (both on the USB drive, if the game data is there)
   /media/fat/logs/dnk/jfSW/jfsw.log   the game's log
 
 Credits

@@ -42,6 +42,11 @@ Install
      before (see Requirements).
   4. Load dnk-Half-Life, dnk-HL Opposing Force or dnk-HL Blue Shift from
      the Other menu.
+  The game data can go on a USB drive instead, into the same folder there
+  (/media/usb0/games/dnk/Xash3D/, with valve and the expansions' folders in
+  it): the game looks for it there first, and then keeps its settings and
+  saved games there as well. Everything else stays on the SD card, the
+  games' code in its valve, gearbox and bshift folders too.
   Opposing Force and Blue Shift need Half-Life's folder valve as well. When
   a game's files are missing, the core says which files to copy where.
   Each game keeps its own OSD settings and button mappings. The core file
@@ -81,10 +86,6 @@ OSD options
                 Weapons gives the suit, armour, every weapon of the game and
                 ammo for them, once each time it is selected. Long Jump
                 Module gives the long jump module (with the suit only).
-  Menu OK, Menu Back
-                the gamepad button that confirms / goes back in the game's
-                menus, whatever it does in the game. MiSTer (default) uses
-                the OK/Back buttons of your MiSTer menu.
 
 Controls
   Keyboard and mouse: Half-Life's own keys (the game's Configuration,
@@ -119,17 +120,21 @@ Controls
   (the stick clicks with controllers that report them as standard gamepad
   buttons, as Xbox and PlayStation controllers do). The game's own Controls
   menu changes the buttons too, and keeps what you set there.
+  In the game's menus the buttons that confirm and go back are the ones of
+  your MiSTer menu, whatever they do in the game: its Menu OK / Menu Back if
+  you set them in "Define joystick buttons", else its A / B. A controller
+  never set up in MiSTer confirms and goes back as on its console: Cross /
+  Circle on PlayStation, A / B on Xbox and on Nintendo.
   Change the buttons in the OSD under "Define Xash3D buttons". "Menu OK" and
-  "Menu Back" there are only needed for a button without a game function;
-  MiSTer doesn't let you assign a button twice, so to confirm with a button
-  that also has a game function, pick it in the OSD's Menu OK/Menu Back
-  options instead.
+  "Menu Back" there are only needed for a spare button without a game
+  function. While the OSD is open, the game gets no input.
 
 Files
   /media/fat/games/dnk/Xash3D/<game>/config.cfg   settings of each game
                                                   (valve, gearbox, bshift)
   /media/fat/games/dnk/Xash3D/<game>/save/        its saved games
   /media/fat/logs/dnk/Xash3D/xash3d.log           the game's log
+  (the settings and saved games on the USB drive, if the game data is there)
 
 Credits
   Xash3D FWGS by Uncle Mike (Xash3D) and the FWGS team, and hlsdk-portable

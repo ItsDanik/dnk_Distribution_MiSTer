@@ -30,19 +30,27 @@ Install
      (with which update_all keeps the ports up to date from then on).
   2. Copy the game data to /media/fat/games/dnk/YQuake2/, next to the
      game.so files that are already in its folders:
-       baseq2/        pak0.pak, pak1.pak, pak2.pak and the folders players/
-                      and video/ from the baseq2 folder of your Quake II.
+       baseq2/        EVERYTHING in the baseq2 folder of your Quake II,
+                      with its folders as they are, and leave nothing out
+                      (pak0.pak, pak1.pak, pak2.pak, players/, video/ and
+                      the rest; files the port does not use do no harm).
                       A CD version needs the 3.20 patch for pak1.pak and
                       pak2.pak. The demo has only pak0.pak and players/.
        baseq2/music/  the soundtrack, optional: 02.ogg to 11.ogg, ripped
                       from the CD. The GOG version's music/ folder
                       (Track02.ogg ...) goes next to baseq2/ instead.
-       xatrix/        The Reckoning, optional: pak0.pak and video/
-       rogue/         Ground Zero, optional: pak0.pak and video/
+       xatrix/        The Reckoning, optional: everything in its folder
+                      xatrix (pak0.pak, video/, ...)
+       rogue/         Ground Zero, optional: everything in its folder
+                      rogue (pak0.pak, video/, ...)
   3. Run danik_hybrid_ports from the Scripts menu, if you have not done so
      before (see Requirements).
   4. Load dnk-Quake II, dnk-Q2 The Reckoning or dnk-Q2 Ground Zero from the
      Other menu.
+  The game data can go on a USB drive instead, into the same folders there
+  (/media/usb0/games/dnk/YQuake2/baseq2/ and so on): the game looks for it
+  there first, and then keeps its settings and saved games there as well.
+  Everything else, the game.so files among it, stays on the SD card.
   The menu entry of Quake II starts the demo when the full game is not
   there; the mission packs need the full game. When a game's files are
   missing, the core says which files to copy where. Each game keeps its own
@@ -83,10 +91,6 @@ OSD options
                 up), Next Level (the level is left through its exit: the
                 first one that does not lead back to the level you came
                 from).
-  Menu OK, Menu Back
-                the gamepad button that confirms / goes back in the game's
-                menus, whatever it does in the game. MiSTer (default) uses
-                the OK/Back buttons of your MiSTer menu.
 
 Controls
   Keyboard and mouse:
@@ -124,21 +128,24 @@ Controls
     L3 (left stick click)               drop the selected item
     Select                              field computer (help)
     Start                               Menu
-  In the game's menus the d-pad and left stick move and Menu OK / Menu Back
-  confirm and go back. Rebind the keyboard and gamepad in the game's Options
+  In the game's menus the d-pad and left stick move, and the buttons that
+  confirm and go back are the ones of your MiSTer menu, whatever they do in
+  the game: its Menu OK / Menu Back if you set them in "Define joystick
+  buttons", else its A / B. A controller never set up in MiSTer confirms
+  and goes back as on its console: Cross / Circle on PlayStation, A / B on
+  Xbox and on Nintendo. Rebind the keyboard and gamepad in the game's Options
   menu; the game keeps your changes. L2 and R2 work on controllers with
   analog triggers, L3 on those whose stick clicks Linux reports as such (a
   DualSense does).
   Change the buttons in the OSD under "Define YQuake2 buttons". "Menu OK" and
-  "Menu Back" there are only needed for a button without a game function;
-  MiSTer doesn't let you assign a button twice, so to confirm with a button
-  that also has a game function, pick it in the OSD's Menu OK/Menu Back
-  options instead.
+  "Menu Back" there are only needed for a spare button without a game
+  function. While the OSD is open, the game gets no input.
 
 Files
   baseq2/config.cfg                     settings
   baseq2/save/                          saved games (xatrix/, rogue/ for
-                                        the mission packs)
+                                        the mission packs; both on the USB
+                                        drive, if the game data is there)
   /media/fat/logs/dnk/YQuake2/yquake2.log   the game's log
 
 Credits

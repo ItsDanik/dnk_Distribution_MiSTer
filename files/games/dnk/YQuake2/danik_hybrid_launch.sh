@@ -13,8 +13,14 @@ CORE="YQuake2"
 GAMEDIR="/media/fat/games/dnk/$CORE"
 LOGDIR="/media/fat/logs/dnk/$CORE"
 LOG="$LOGDIR/yquake2.log"
+# The game's data, settings and saved games: games/dnk/YQuake2/ on a USB drive
+# if the player put the folder there (the first of usb0..usb7 that has it,
+# as Main_MiSTer looks for a core's games there before the SD card), else on
+# the SD card. The game runs in that folder. Its programs stay in GAMEDIR on
+# the SD card, where Downloader installs them: USB drives are mounted noexec.
+DATADIR=$(for d in /media/usb[0-7]/games/dnk/"$CORE" "$GAMEDIR"; do [ -d "$d" ] && { echo "$d"; break; }; done)
 
-cd "$GAMEDIR" || exit 1
+cd "$DATADIR" || exit 1
 mkdir -p "$LOGDIR" config saves
 
 # Only once
@@ -28,6 +34,7 @@ flock -n 9 || exit 0
 sleep 1
 
 mv -f "$LOG" "$LOGDIR/yquake2.prev.log" 2>/dev/null
+echo "Game data in $DATADIR" > "$LOG"
 
 # What the game prints is kept in memory while it runs and goes to the log on
 # the SD card when it has left. The card is mounted "sync": a line printed
@@ -46,9 +53,9 @@ savelog() {
 export MISTER_HYBRID_CORE="$CORE"
 export MISTER_HYBRID_JN="A,B,X,Y,L,R,Select,Start"
 # Everything the game writes stays in its folder
-export HOME="$GAMEDIR"
-export XDG_CONFIG_HOME="$GAMEDIR/config"
-export XDG_DATA_HOME="$GAMEDIR/config"
+export HOME="$DATADIR"
+export XDG_CONFIG_HOME="$DATADIR/config"
+export XDG_DATA_HOME="$DATADIR/config"
 
 # Both CPUs: the game takes CPU0 (better DDR3 bandwidth, Main_MiSTer lives on
 # CPU1) and runs audio and the frame copy on CPU1. Everything else on the
@@ -62,11 +69,14 @@ GAME=
 # The game must not outlive us: on SIGTERM it saves its settings and quits
 trap '[ -n "$GAME" ] && kill "$GAME" 2>/dev/null && wait "$GAME"; savelog; exit 0' TERM INT
 while :; do
-    # The data is in baseq2/ (and xatrix/, rogue/) next to the binary, and
-    # -portable keeps the settings and saved games there; which game is the
-    # menu entry's (MISTER_HYBRID_SET) or picked from a list
-    # (MiSTer_SelectGame()), "+set game" for a mission pack
-    nice -n -20 taskset 0x03 ./YQuake2 -portable < /dev/null >> "$RUNLOG" 2>&1 &
+    # GAME: its command line (where it finds data, settings and saved games:
+    # DATADIR, the current folder; what came with the port, libraries the game
+    # loads among them: GAMEDIR). The data is in baseq2/ (and xatrix/, rogue/)
+    # in DATADIR, and -portable keeps the settings and saved games there; the
+    # game libraries (game.so) are in those folders in GAMEDIR, which the game
+    # searches after DATADIR. Which game is the menu entry's (MISTER_HYBRID_SET)
+    # or picked from a list (MiSTer_SelectGame()), "+set game" for a mission pack
+    nice -n -20 taskset 0x03 "$GAMEDIR/YQuake2" -portable < /dev/null >> "$RUNLOG" 2>&1 &
     GAME=$!
     wait "$GAME"
     RC=$?
@@ -85,9 +95,9 @@ GAME=
 # core's picture (./mh_message, host version 13), and a message stays there
 # until the player leaves the core. Else back to the MiSTer menu.
 if grep -q "^$CORE" /tmp/CORENAME 2>/dev/null; then
-    if [ $RC -ne 0 ] && ! ./mh_message --shown >> "$LOG" 2>&1; then
-        ./mh_message --error "The game stopped unexpectedly (exit code $RC).\nIts log: ${LOG#/media/fat/}" >> "$LOG" 2>&1
+    if [ $RC -ne 0 ] && ! "$GAMEDIR/mh_message" --shown >> "$LOG" 2>&1; then
+        "$GAMEDIR/mh_message" --error "The game stopped unexpectedly (exit code $RC).\nIts log: ${LOG#/media/fat/}" >> "$LOG" 2>&1
         sleep 0.1
     fi
-    ./mh_message --shown >> "$LOG" 2>&1 || echo "load_core /media/fat/menu.rbf" > /dev/MiSTer_cmd
+    "$GAMEDIR/mh_message" --shown >> "$LOG" 2>&1 || echo "load_core /media/fat/menu.rbf" > /dev/MiSTer_cmd
 fi

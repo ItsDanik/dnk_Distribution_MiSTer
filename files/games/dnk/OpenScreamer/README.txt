@@ -49,6 +49,11 @@ Install
     audio tracks: as files in screamer2/music/, named track_02.ogg ..
     track_09.ogg (.mp3 or .wav do as well; track 2 is the menu's, 3 to 9
     the races'). Without them Screamer 2 has no music.
+  The games' files can go on a USB drive instead, into the same folders
+  there (/media/usb0/games/dnk/OpenScreamer/screamer/ and .../screamer2/):
+  the games look for them there first, and then keep their settings and
+  saved games there as well (.../OpenScreamer/saves/). Everything else
+  stays on the SD card.
   Load the game from the Other menu: dnk-Screamer or dnk-Screamer 2.
 
 When a game's files are missing, the core says which files to copy where;
@@ -95,10 +100,6 @@ OSD options
                 your records. Screamer 2: Unlock All Tracks, Unlock Fifth
                 Cars (each team's fifth car), Unlock All Leagues, kept with
                 its settings. Each game shows only its own.
-  Menu OK, Menu Back
-                the gamepad button that confirms / goes back in the games'
-                menus, whatever it does in a race. MiSTer (default) uses
-                the OK/Back buttons of your MiSTer menu.
 
 Controls
   Keyboard (the mouse is not used):
@@ -149,11 +150,14 @@ Controls
   Map the wheel's buttons in the OSD as for a gamepad. While a wheel is
   connected, a gamepad's stick pushed up also counts as a pedal, and the
   gas pedal moves the menus' lines like the stick up.
+  In the games' menus the buttons that confirm and go back are the ones of
+  your MiSTer menu, whatever they do in a race: its Menu OK / Menu Back if
+  you set them in "Define joystick buttons", else its A / B. A controller
+  never set up in MiSTer confirms and goes back as on its console: Cross /
+  Circle on PlayStation, A / B on Xbox and on Nintendo.
   Change the buttons in the OSD under "Define OpenScreamer buttons". "Menu
-  OK" and "Menu Back" there are only needed for a button without a game
-  function; MiSTer doesn't let you assign a button twice, so to confirm
-  with a button that also has a game function, pick it in the OSD's Menu
-  OK/Menu Back options instead.
+  OK" and "Menu Back" there are only needed for a spare button without a
+  game function. While the OSD is open, the game gets no input.
 
 Files
   /media/fat/games/dnk/OpenScreamer/saves/   settings, best times,

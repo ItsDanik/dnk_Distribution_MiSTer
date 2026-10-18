@@ -10,8 +10,9 @@ controls.
 3. Run danik_hybrid_ports from the Scripts menu, tick the games you want and press X: Apply.
 
 The game data is not included: copy the files from your own copy of each game into its port's folder on
-the SD card. Each port's README.txt, which comes with it into that folder, says which files go where;
-without them, the game says so when it is loaded.
+the SD card, or into the same folder on a USB drive (`/media/usb0/games/dnk/<Engine>/`), where the port
+looks first. Each port's README.txt, which comes with it into the folder on the SD card, says which files
+go where; without them, the game says so when it is loaded.
 
 | Games | Your game files go in | Which files |
 |---|---|---|
