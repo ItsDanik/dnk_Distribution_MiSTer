@@ -1,0 +1,12 @@
+doom|Doom
+sigil|Doom - SIGIL
+sigil2|Doom - SIGIL II
+doom2|Doom II
+nerve|Doom II - No Rest for the Living
+master|Doom II - Master Levels
+tnt|Final Doom - TNT Evilution
+plutonia|Final Doom - Plutonia Experiment
+heretic|Heretic
+hexen|Hexen
+hexdd|Hexen - Deathkings
+strife|Strife

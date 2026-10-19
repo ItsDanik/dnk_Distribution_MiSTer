@@ -16,6 +16,7 @@ go where; without them, the game says so when it is loaded.
 
 | Games | Your game files go in | Which files |
 |---|---|---|
+| Doom, Doom - SIGIL, Doom - SIGIL II, Doom II, Doom II - No Rest for the Living, Doom II - Master Levels, Final Doom - TNT Evilution, Final Doom - Plutonia Experiment, Heretic, Hexen, Hexen - Deathkings, Strife | `/media/fat/games/dnk/CrispyDoom/` | [README.txt](files/games/dnk/CrispyDoom/README.txt) |
 | Carmageddon, Carmageddon: Splat Pack | `/media/fat/games/dnk/Dethrace/` | [README.txt](files/games/dnk/Dethrace/README.txt) |
 | Wolfenstein 3D, Spear of Destiny, SoD: Return to Danger, SoD: Ultimate Challenge | `/media/fat/games/dnk/ECWolf/` | [README.txt](files/games/dnk/ECWolf/README.txt) |
 | Shadow Warrior, SW: Wanton Destruction, SW: Twin Dragon | `/media/fat/games/dnk/jfSW/` | [README.txt](files/games/dnk/jfSW/README.txt) |

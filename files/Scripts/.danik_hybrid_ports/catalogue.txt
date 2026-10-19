@@ -1,5 +1,17 @@
 # The games of the ports in the database, for the launcher's screen:
 # <Engine>|<Game>|<title>. Made by launcher/distribution.py of Hybrid_MiSTer.
+CrispyDoom|doom|Doom
+CrispyDoom|sigil|Doom - SIGIL
+CrispyDoom|sigil2|Doom - SIGIL II
+CrispyDoom|doom2|Doom II
+CrispyDoom|nerve|Doom II - No Rest for the Living
+CrispyDoom|master|Doom II - Master Levels
+CrispyDoom|tnt|Final Doom - TNT Evilution
+CrispyDoom|plutonia|Final Doom - Plutonia Experiment
+CrispyDoom|heretic|Heretic
+CrispyDoom|hexen|Hexen
+CrispyDoom|hexdd|Hexen - Deathkings
+CrispyDoom|strife|Strife
 Dethrace|CARMA|Carmageddon
 Dethrace|SPLAT|Carmageddon: Splat Pack
 ECWolf|WL|Wolfenstein 3D
