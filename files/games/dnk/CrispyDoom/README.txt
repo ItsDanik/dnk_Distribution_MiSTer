@@ -99,6 +99,10 @@ OSD options
                 heaviest and can miss a picture in the busiest scenes.
   FM Music      FPGA (default): the music on the YM3812 chip in the core;
                 Software: worked out on the ARM. Applies at once.
+  Rumble        On (default): the controller rumbles when you are hurt,
+                as hard as the hit, when you fire (the heavier the
+                weapon, the harder), when you land from a fall, and in
+                Hexen's earthquakes. Off: never.
   Cheats        God Mode, No Clipping, No Target, Infinite Ammo, Buddha
                 (never below 1% health) while on; Give All (IDKFA; in
                 Heretic and Hexen all weapons, keys and artifacts, in Strife
