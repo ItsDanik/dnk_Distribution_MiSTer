@@ -2,7 +2,7 @@
 # Written by launcher/distribution.py of Hybrid_MiSTer.
 CrispyDoom|CrispyDoom_20261022.zip
 Dethrace|Dethrace_20261019.zip
-ECWolf|ECWolf_20261019.zip
+ECWolf|ECWolf_20261023.zip
 jfSW|jfSW_20261019.zip
 OpenScreamer|OpenScreamer_20261019.zip
 Xash3D|Xash3D_20261019.zip
