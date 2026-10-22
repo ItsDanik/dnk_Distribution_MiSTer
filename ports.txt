@@ -1,6 +1,6 @@
 # The ports in the database, a line each: <Engine>|<release zip>.
 # Written by launcher/distribution.py of Hybrid_MiSTer.
-CrispyDoom|CrispyDoom_20261020.zip
+CrispyDoom|CrispyDoom_20261022.zip
 Dethrace|Dethrace_20261019.zip
 ECWolf|ECWolf_20261019.zip
 jfSW|jfSW_20261019.zip

@@ -97,7 +97,17 @@ OSD options
                 stretched. Menus, title screens and the intermission keep
                 their 200 lines, centred. Applies at once. 640x240 is the
                 heaviest and can miss a picture in the busiest scenes.
-  FM Music      FPGA (default): the music on the YM3812 chip in the core;
+  Music         MIDI (default): the music as General MIDI, played by the
+                core's synthesizer with a SoundFont, or by an MT32-pi when
+                one is connected and on. FM chip: as the original's.
+  SoundFont     Default: GeneralUser GS, which comes with the port
+                (games/dnk/SoundFonts/GeneralUser-GS.sf2). 1 to 7: your
+                own .sf2 files in that folder, by name, or as the MIDI
+                Player core sets them. A SoundFont missing, damaged or too
+                big (over 64 MB of samples) is said in the MiSTer's info
+                box, and the music goes to the FM chip.
+  FM Music      With Music on the FM chip. FPGA (default): the music on
+                the YM3812 chip in the core;
                 Software: worked out on the ARM. Applies at once.
   Rumble        On (default): the controller rumbles when you are hurt,
                 as hard as the hit, when you fire (the heavier the
@@ -156,6 +166,16 @@ Controls
   and "Menu Back" there are only needed for a spare button without a game
   function. While the OSD is open, the game gets no input.
 
+If something is wrong
+  If the game stutters, the sound breaks up or something else is wrong,
+  open the OSD while it happens and pick Save Diagnostic Report, the last
+  line of the menu. The game keeps running; MiSTer's info box says the
+  report is saved in games/dnk/diagnostics/. Send that file
+  (CrispyDoom_<date>_<time>.zip) with a few words on what went wrong. It
+  has the setup, how the last 60 seconds went, the game's log and a
+  screenshot; no network settings, addresses, saved games or lists of
+  your files.
+
 Files
   games/dnk/CrispyDoom/default.cfg, crispy-doom.cfg   settings
   games/dnk/CrispyDoom/savegames/                   saved games
@@ -165,6 +185,9 @@ Files
   games/dnk/CrispyDoom/hexen.cfg, crispy-hexen.cfg    Hexen's settings
   games/dnk/CrispyDoom/strife.cfg, crispy-strife.cfg  Strife's settings
   /media/fat/logs/dnk/CrispyDoom/crispydoom.log   the game's log
+  games/dnk/SoundFonts/GeneralUser-GS.sf2         the SoundFont, shared
+                                                  with the other ports
+                                                  with MIDI music
 
 Credits
   Crispy Doom, Crispy Heretic, Crispy Hexen and Crispy Strife by Fabian
@@ -172,6 +195,9 @@ Credits
   contributors (Chocolate Strife: Strife reconstructed by James Haley and
   Samuel Villarreal), and on the Doom, Heretic and Hexen source code
   released by id Software and Raven Software. JTOPL by Jose Tejada (the FM chip), Nuked OPL3 by nukeykt.
+  GeneralUser GS by S. Christian Collins (the SoundFont,
+  https://www.schristiancollins.com/generaluser.php; its licence in
+  games/dnk/SoundFonts/GeneralUser-GS-LICENSE.txt).
   SDL by Sam Lantinga and contributors.
   MiSTer by Sorgelig and the MiSTer-devel contributors.
   MiSTer Frontier by MiSTer Organize

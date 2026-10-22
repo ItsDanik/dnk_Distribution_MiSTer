@@ -14,6 +14,10 @@ the SD card, or into the same folder on a USB drive (`/media/usb0/games/dnk/<Eng
 looks first. Each port's README.txt, which comes with it into the folder on the SD card, says which files
 go where; without them, the game says so when it is loaded.
 
+The ports whose games play MIDI music bring the SoundFont [GeneralUser GS](https://www.schristiancollins.com/generaluser.php)
+by S. Christian Collins, in `/media/fat/games/dnk/SoundFonts/` with its licence: their cores' synthesizer plays
+the music with it. Your own `.sf2` files can go in the same folder.
+
 | Games | Your game files go in | Which files |
 |---|---|---|
 | Doom, Doom - SIGIL, Doom - SIGIL II, Doom II, Doom II - No Rest for the Living, Doom II - Master Levels, Final Doom - TNT Evilution, Final Doom - Plutonia Experiment, Heretic, Hexen, Hexen - Deathkings, Strife | `/media/fat/games/dnk/CrispyDoom/` | [README.txt](files/games/dnk/CrispyDoom/README.txt) |
