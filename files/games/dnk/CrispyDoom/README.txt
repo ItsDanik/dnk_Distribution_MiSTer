@@ -88,7 +88,7 @@ OSD options
                 width. Not there with forced_scandoubler=1. HUD (Top) /
                 HUD (Bottom): in 240 lines, how many lines the messages sit
                 below the top edge and the status bar above the bottom one,
-                0 to 24 (10 by default); greyed out in 200 lines.
+                0 to 24 (0 by default); greyed out in 200 lines.
   Resolution    320x240 (default), 640x240, 320x200 (as the original) or
                 640x200. The 640-wide ones show the same picture with twice
                 the detail across. In 240 lines the view fills all 240, the
