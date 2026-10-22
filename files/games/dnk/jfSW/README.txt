@@ -75,8 +75,9 @@ OSD options
                 width. Not there with forced_scandoubler=1. HUD (Bottom):
                 in the 240-line resolutions, how many lines the status bar
                 (or the mini bar) sits above the bottom edge of the screen,
-                0 to 24 (10 by default), so that a CRT's overscan does not
-                hide it; greyed out at 200 lines.
+                0 to 24 (0 by default), so that a CRT's overscan does not
+                hide it; greyed out at 200 lines. HUD (Top) is always
+                greyed out: the game has nothing at the top edge.
   Resolution    what the game renders and the core puts out, always at
                 15kHz: 320x200 (default, as the original), 640x200, 320x240
                 or 640x240. 640 across is twice the detail in the same
@@ -100,12 +101,26 @@ OSD options
                 (default) leaves half of the game's own range in both
                 directions; Off is the whole range. For the keys, the
                 mouse and the gamepad alike.
+  Music         for the shareware version's music, which is MIDI (the
+                full game's is the CD's). MIDI (default): played by the
+                core's synthesizer with a SoundFont, or by an MT32-pi
+                when one is connected and on. FM chip: as an AdLib card.
+  SoundFont     Default: GeneralUser GS, which comes with the port
+                (games/dnk/SoundFonts/GeneralUser-GS.sf2). 1 to 7: your
+                own .sf2 files in that folder, by name, or as the MIDI
+                Player core sets them. A SoundFont missing, damaged or too
+                big (over 64 MB of samples) is said in the MiSTer's info
+                box, and the music goes to the FM chip.
+  MT32-pi       only there while an MT32-pi answers on the user port:
+                On (default) sends the MIDI music to it.
   Cheats        God Mode: nothing hurts you while it is on. No Clipping:
                 you walk through walls while it is on. Give All: every
                 weapon with full ammo, armor, the inventory items and all
                 keys, once each time it is selected. Next Level: the level
                 counts as completed, as at its exit, and the next one
                 starts (not on the last level).
+  Save Diagnostic Report
+                the last line: see "If something is wrong".
 
 Controls
   Keyboard and mouse:
@@ -159,16 +174,30 @@ Music
   tracks from Ogg Vorbis files named Track02.ogg to Track14.ogg (track 1
   of the CD is the data). Classic Redux comes with them; from an original
   CD, rip the audio tracks and encode them.
-  The shareware version has no CD: its music is MIDI. This build plays it
-  as an AdLib or Sound Blaster card did, on an FM chip (a YM3812) in the
-  FPGA core, with the game's own instruments. The game's Music Volume
-  sets its level. It needs the core (.rbf) of the same release.
+  The shareware version has no CD: its music is MIDI. With Music on MIDI
+  (the default) a SoundFont synthesizer in the FPGA core plays it, or an
+  MT32-pi when one is connected; with Music on FM chip it plays as an
+  AdLib or Sound Blaster card did, on a YM3812 in the core, with the
+  game's own instruments. The game's Music Volume sets its level. It
+  needs the core (.rbf) of the same release.
+
+If something is wrong
+  If the game stutters, the sound breaks up or something else is wrong,
+  open the OSD while it happens and pick Save Diagnostic Report, the last
+  line of the menu. The game keeps running; MiSTer's info box says the
+  report is saved in games/dnk/diagnostics/. Send that file
+  (jfSW_<date>_<time>.zip) with a few words on what went wrong. It has
+  the setup, how the last 60 seconds went, the game's log and a
+  screenshot; no network settings, addresses, saved games or lists of
+  your files.
 
 Files
   /media/fat/games/dnk/jfSW/sw.cfg      settings
   /media/fat/games/dnk/jfSW/game*.sav    saved games
       (both on the USB drive, if the game data is there)
   /media/fat/logs/dnk/jfSW/jfsw.log   the game's log
+  /media/fat/games/dnk/SoundFonts/GeneralUser-GS.sf2   the SoundFont,
+      shared with the other ports with MIDI music
 
 Credits
   JFShadowWarrior, JFBuild, JFAudioLib and JFMACT by Jonathon Fowler and
@@ -182,6 +211,9 @@ Credits
   form EDuke32 keeps it in, plays the music on the FM chip.
   JTOPL by Jose Tejada (jotego), https://github.com/jotego/jtopl: the FM
   chip in the core.
+  GeneralUser GS by S. Christian Collins (the SoundFont,
+  https://www.schristiancollins.com/generaluser.php; its licence in
+  games/dnk/SoundFonts/GeneralUser-GS-LICENSE.txt).
   libogg and libvorbis by the Xiph.Org Foundation.
   SDL by Sam Lantinga and contributors.
   MiSTer by Sorgelig and the MiSTer-devel contributors.
