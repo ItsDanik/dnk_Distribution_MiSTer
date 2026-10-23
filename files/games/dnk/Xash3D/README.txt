@@ -70,8 +70,9 @@ OSD options
                 width. Not there with forced_scandoubler=1.
                 HUD (Top), HUD (Bottom): at 320x240, how many lines the HUD
                 keeps from the top and bottom edges of the screen, 0 to 24
-                (10 by default), so that a CRT's overscan does not hide it.
-                0 is the very edge, for HDMI. Greyed out at 320x200.
+                (0 by default, the very edge, for HDMI), so that a CRT's
+                overscan does not hide it. They move at once. Greyed out at
+                320x200.
   Resolution    the game in 320x200 (default) or 320x240. At 320x240 the
                 view fills all 240 lines and the HUD is drawn over it at
                 the HUD margins. The menus are always 640x480. Applies at
@@ -80,12 +81,20 @@ OSD options
                 On: a picture every second field, an even 30 per second
                 where the game cannot keep up with 60. Off (default): up
                 to 60.
+  Rumble        On (default) / Strong / Off: the gamepad shakes with your
+                shots (each weapon its own way; the egon's beam and the
+                gauss charging for as long as they last), the damage you
+                take (the more, the stronger), explosions near you and when
+                the screen shakes (earthquakes, the tram crash, the big
+                monsters' stomps). Strong is twice as strong.
   Cheats        God Mode, No Clip (fly through walls) and Invisible to
                 Monsters stay on while they are on, through saved games
                 and level changes, and are gone when turned off. Give All
                 Weapons gives the suit, armour, every weapon of the game and
                 ammo for them, once each time it is selected. Long Jump
                 Module gives the long jump module (with the suit only).
+  Save Diagnostic Report
+                the last line: see "If something is wrong" below.
 
 Controls
   Keyboard and mouse: Half-Life's own keys (the game's Configuration,
@@ -128,6 +137,17 @@ Controls
   Change the buttons in the OSD under "Define Xash3D buttons". "Menu OK" and
   "Menu Back" there are only needed for a spare button without a game
   function. While the OSD is open, the game gets no input.
+
+If something is wrong
+  If the game stutters, the sound breaks up or something else is wrong,
+  open the OSD while it happens and pick Save Diagnostic Report, the last
+  line of the menu. The game keeps running; MiSTer's info box says the
+  report is saved in games/dnk/diagnostics/ on the SD card. Send that file
+  (Xash3D_<date>_<time>.zip) with a few words on what went wrong. The
+  report has the setup (versions, the video and audio lines of MiSTer.ini,
+  the OSD settings), how the last 60 seconds went, the game's log and a
+  screenshot. Nothing else: no network settings, addresses, saved games or
+  lists of your files.
 
 Files
   /media/fat/games/dnk/Xash3D/<game>/config.cfg   settings of each game
