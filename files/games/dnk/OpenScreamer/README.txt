@@ -75,7 +75,7 @@ OSD options
                 width. Not there with forced_scandoubler=1. HUD (Top) and
                 HUD (Bottom): in a race with 240 rows, how many lines the
                 race's labels and clocks at the top and its instruments at
-                the bottom are from the edges of the screen, 0 to 24 (10 by
+                the bottom are from the edges of the screen, 0 to 24 (0 by
                 default), so that a CRT's overscan does not hide them;
                 greyed out with 200 rows. They move at once.
   Resolution    both games. 320x200 (default), the games' own; 320x240:
@@ -100,6 +100,8 @@ OSD options
                 your records. Screamer 2: Unlock All Tracks, Unlock Fifth
                 Cars (each team's fifth car), Unlock All Leagues, kept with
                 its settings. Each game shows only its own.
+  Save Diagnostic Report
+                the last line: see "If something is wrong" below.
 
 Controls
   Keyboard (the mouse is not used):
@@ -158,6 +160,17 @@ Controls
   Change the buttons in the OSD under "Define OpenScreamer buttons". "Menu
   OK" and "Menu Back" there are only needed for a spare button without a
   game function. While the OSD is open, the game gets no input.
+
+If something is wrong
+  If the game stutters, the sound breaks up or something else is wrong,
+  open the OSD while it happens and pick Save Diagnostic Report, the last
+  line of the menu. The game keeps running; MiSTer's info box says the
+  report is saved in games/dnk/diagnostics/ on the SD card. Send that file
+  (OpenScreamer_<date>_<time>.zip) with a few words on what went wrong. The
+  report has the setup (versions, the video and audio lines of MiSTer.ini,
+  the OSD settings), how the last 60 seconds went, the game's log and a
+  screenshot. Nothing else: no network settings, addresses, saved games or
+  lists of your files.
 
 Files
   /media/fat/games/dnk/OpenScreamer/saves/   settings, best times,
