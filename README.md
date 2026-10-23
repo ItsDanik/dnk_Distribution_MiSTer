@@ -24,6 +24,7 @@ the music with it. Your own `.sf2` files can go in the same folder.
 | Carmageddon, Carmageddon: Splat Pack | `/media/fat/games/dnk/Dethrace/` | [README.txt](files/games/dnk/Dethrace/README.txt) |
 | Wolfenstein 3D, Spear of Destiny, SoD: Return to Danger, SoD: Ultimate Challenge | `/media/fat/games/dnk/ECWolf/` | [README.txt](files/games/dnk/ECWolf/README.txt) |
 | Shadow Warrior, SW: Wanton Destruction, SW: Twin Dragon | `/media/fat/games/dnk/jfSW/` | [README.txt](files/games/dnk/jfSW/README.txt) |
+| MIDI Player | `/media/fat/games/dnk/MIDIPlayer/` | [README.txt](files/games/dnk/MIDIPlayer/README.txt) |
 | Screamer, Screamer 2 | `/media/fat/games/dnk/OpenScreamer/` | [README.txt](files/games/dnk/OpenScreamer/README.txt) |
 | Half-Life, HL: Opposing Force, HL: Blue Shift | `/media/fat/games/dnk/Xash3D/` | [README.txt](files/games/dnk/Xash3D/README.txt) |
 | Quake II, Q2: The Reckoning, Q2: Ground Zero | `/media/fat/games/dnk/YQuake2/` | [README.txt](files/games/dnk/YQuake2/README.txt) |

@@ -21,6 +21,7 @@ ECWolf|SD3|SoD: Ultimate Challenge
 jfSW|SW|Shadow Warrior
 jfSW|WT|SW: Wanton Destruction
 jfSW|TD|SW: Twin Dragon
+MIDIPlayer|MIDIPlayer|MIDI Player
 OpenScreamer|S1|Screamer
 OpenScreamer|S2|Screamer 2
 Xash3D|HL|Half-Life
