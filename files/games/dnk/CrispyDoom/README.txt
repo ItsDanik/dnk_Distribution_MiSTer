@@ -113,6 +113,12 @@ OSD options
                 as hard as the hit, when you fire (the heavier the
                 weapon, the harder), when you land from a fall, and in
                 Hexen's earthquakes. Off: never.
+  Turn Sensitivity, Look Sensitivity
+                How fast the right stick turns and looks up and down:
+                100% (default) to 200%, then 25% to 75%. 150% is the
+                speed of the releases up to 20261023. Above 150% the look
+                is at full speed with less of a tilt, no faster at full
+                tilt. Look Sensitivity is greyed out in Strife.
   Cheats        God Mode, No Clipping, No Target, Infinite Ammo, Buddha
                 (never below 1% health) while on; Give All (IDKFA; in
                 Heretic and Hexen all weapons, keys and artifacts, in Strife
