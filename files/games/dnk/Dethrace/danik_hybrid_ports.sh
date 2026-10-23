@@ -67,6 +67,12 @@
 #   - when it exits it is not started again until the core is loaded again
 #     (to leave, a launcher loads the menu core)
 #
+# A set name that ends in _TEST is a build being tried with a port's
+# tools/test_on_mister.sh, which runs its game itself: no launch script is
+# started for it, and while it is loaded the daemon does nothing else either
+# (version 7: the work between games, every 10 seconds, made the game under
+# test miss frames).
+#
 # The whole script is read before anything runs (see the last line), so it can
 # be replaced while the daemon is running; the daemon restarts itself with the
 # new file as soon as no game is running.
@@ -82,7 +88,7 @@
 # under the terms of the GNU General Public License as published by the Free
 # Software Foundation, version 3 of the License.
 
-VERSION=6
+VERSION=7
 SELF=$(readlink -f "$0")
 # DANIK_HYBRID_ROOT and DANIK_HYBRID_TMP: another SD card and /tmp, for testing
 ROOT=${DANIK_HYBRID_ROOT:-/media/fat}
@@ -141,6 +147,14 @@ daemon_pid() {
     local pid
     pid=$(cat "$PIDFILE" 2>/dev/null)
     [ -n "$pid" ] && grep -qs "$MARK" "/proc/$pid/cmdline" && echo "$pid"
+}
+
+# a build tried with tools/test_on_mister.sh (set name <engine>_TEST)
+is_test() {
+    case "$1" in
+        *_TEST) return 0 ;;
+    esac
+    return 1
 }
 
 valid_name() {
@@ -446,7 +460,9 @@ run_daemon() {
             fi
             CORE=$cur
             STAMP=$stamp
-            if launcher_of "$cur"; then
+            if is_test "$cur"; then
+                log "$cur loaded: a test, left to tools/test_on_mister.sh"
+            elif launcher_of "$cur"; then
                 log "$cur loaded: starting $LAUNCH"
                 MISTER_HYBRID_SET=$cur setsid bash "$LAUNCH" >> "$LOG" 2>&1 < /dev/null &
                 CHILD=$!
@@ -464,8 +480,9 @@ run_daemon() {
         # (not while Downloader runs, nor while the screen moves them);
         # a newer version of this file, which can have been installed over
         # this file or have come with a port; an older file installed over
-        # this one is replaced by the newest copy the same way.
-        if [ -z "$CHILD" ] && ! launcher_of "$CORE"; then
+        # this one is replaced by the newest copy the same way. Not while a
+        # test is loaded: its game is running.
+        if [ -z "$CHILD" ] && ! is_test "$CORE" && ! launcher_of "$CORE"; then
             tick=$((tick + 1))
             [ $((tick % 20)) -eq 1 ] && ! updating && migrate_all
             changed=
