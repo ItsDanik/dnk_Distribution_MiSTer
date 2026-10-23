@@ -14,6 +14,8 @@ CrispyDoom|hexdd|Hexen - Deathkings
 CrispyDoom|strife|Strife
 Dethrace|CARMA|Carmageddon
 Dethrace|SPLAT|Carmageddon: Splat Pack
+DXXRebirth|d1|Descent
+DXXRebirth|d2|Descent II
 ECWolf|WL|Wolfenstein 3D
 ECWolf|SOD|Spear of Destiny
 ECWolf|SD2|SoD: Return to Danger

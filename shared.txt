@@ -1,4 +1,4 @@
 # The files several ports bring, stored once, a line each: <path>|<Engine>,...
 # Written by launcher/distribution.py of Hybrid_MiSTer.
-games/dnk/SoundFonts/GeneralUser-GS-LICENSE.txt|CrispyDoom,jfSW,MIDIPlayer
-games/dnk/SoundFonts/GeneralUser-GS.sf2|CrispyDoom,jfSW,MIDIPlayer
+games/dnk/SoundFonts/GeneralUser-GS-LICENSE.txt|CrispyDoom,DXXRebirth,jfSW,MIDIPlayer
+games/dnk/SoundFonts/GeneralUser-GS.sf2|CrispyDoom,DXXRebirth,jfSW,MIDIPlayer

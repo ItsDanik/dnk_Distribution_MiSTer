@@ -2,6 +2,7 @@
 # Written by launcher/distribution.py of Hybrid_MiSTer.
 CrispyDoom|CrispyDoom_20261023.zip
 Dethrace|Dethrace_20261023.zip
+DXXRebirth|DXXRebirth_20261023.zip
 ECWolf|ECWolf_20261023.zip
 jfSW|jfSW_20261023.zip
 MIDIPlayer|MIDIPlayer_20261023.zip

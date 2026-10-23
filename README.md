@@ -22,6 +22,7 @@ the music with it. Your own `.sf2` files can go in the same folder.
 |---|---|---|
 | Doom, Doom - SIGIL, Doom - SIGIL II, Doom II, Doom II - No Rest for the Living, Doom II - Master Levels, Final Doom - TNT Evilution, Final Doom - Plutonia Experiment, Heretic, Hexen, Hexen - Deathkings, Strife | `/media/fat/games/dnk/CrispyDoom/` | [README.txt](files/games/dnk/CrispyDoom/README.txt) |
 | Carmageddon, Carmageddon: Splat Pack | `/media/fat/games/dnk/Dethrace/` | [README.txt](files/games/dnk/Dethrace/README.txt) |
+| Descent, Descent II | `/media/fat/games/dnk/DXXRebirth/` | [README.txt](files/games/dnk/DXXRebirth/README.txt) |
 | Wolfenstein 3D, Spear of Destiny, SoD: Return to Danger, SoD: Ultimate Challenge | `/media/fat/games/dnk/ECWolf/` | [README.txt](files/games/dnk/ECWolf/README.txt) |
 | Shadow Warrior, SW: Wanton Destruction, SW: Twin Dragon | `/media/fat/games/dnk/jfSW/` | [README.txt](files/games/dnk/jfSW/README.txt) |
 | MIDI Player | `/media/fat/games/dnk/MIDIPlayer/` | [README.txt](files/games/dnk/MIDIPlayer/README.txt) |
