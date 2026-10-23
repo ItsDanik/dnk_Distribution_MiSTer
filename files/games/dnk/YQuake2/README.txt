@@ -72,15 +72,20 @@ OSD options
                 are; HDMI is not affected. The size is for the game's
                 picture: the core's own, with its messages, keeps its
                 width. Not there with forced_scandoubler=1.
-                HUD (Top), HUD (Bottom): at 320x240, how many lines the
-                messages at the top and the status bar at the bottom keep
-                from the edges of the screen, 0 to 24 (10 by default), so
-                that a CRT's overscan does not hide them. 0 is the very
-                edge, for HDMI. Greyed out at 320x200.
+                HUD (Bottom): at 320x240, how many lines the status bar
+                sits above the bottom edge of the screen, 0 to 24 (0 by
+                default, the very edge, for HDMI), so that a CRT's
+                overscan does not hide it; greyed out at 320x200. HUD (Top)
+                is always greyed out: the messages at the top stay at the
+                edge, as in Quake II.
   Resolution    320x200 (default) or 320x240: the game's picture, switched
                 at once. At 320x240 the view fills all 240 lines and the
                 status bar is drawn over it at the HUD margin; it shows a
                 little more and is a little slower.
+  Rumble        the gamepad's rumble, Quake II's own (shots, hits, falls,
+                explosions, doors and platforms nearby): On (default),
+                Strong or Off. It takes the place of the game's "rumble
+                intensity".
   Cheats        single player only. God Mode, No Clipping (fly through
                 walls), Invisible to Monsters and Infinite Ammo stay on
                 while they are on, through saved games and level changes,
@@ -91,6 +96,8 @@ OSD options
                 up), Next Level (the level is left through its exit: the
                 first one that does not lead back to the level you came
                 from).
+  Save Diagnostic Report
+                the last line: see "If something is wrong" below.
 
 Controls
   Keyboard and mouse:
@@ -139,7 +146,19 @@ Controls
   DualSense does).
   Change the buttons in the OSD under "Define YQuake2 buttons". "Menu OK" and
   "Menu Back" there are only needed for a spare button without a game
-  function. While the OSD is open, the game gets no input.
+  function. While the OSD is open, the game gets no input. Controllers
+  that can rumble do (the OSD's Rumble).
+
+If something is wrong
+  If the game stutters, the sound breaks up or something else is wrong,
+  open the OSD while it happens and pick Save Diagnostic Report, the last
+  line of the menu. The game keeps running; MiSTer's info box says the
+  report is saved in games/dnk/diagnostics/ on the SD card. Send that file
+  (YQuake2_<date>_<time>.zip) with a few words on what went wrong. The
+  report has the setup (versions, the video and audio lines of MiSTer.ini,
+  the OSD settings), how the last 60 seconds went, the game's log and a
+  screenshot. Nothing else: no network settings, addresses, saved games or
+  lists of your files.
 
 Files
   baseq2/config.cfg                     settings
