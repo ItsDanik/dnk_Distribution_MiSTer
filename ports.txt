@@ -8,4 +8,4 @@ jfSW|jfSW_20261023.zip
 MIDIPlayer|MIDIPlayer_20261023.zip
 OpenScreamer|OpenScreamer_20261023.zip
 Xash3D|Xash3D_20261023.zip
-YQuake2|YQuake2_20261023.zip
+YQuake2|YQuake2_20261024.zip
