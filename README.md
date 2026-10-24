@@ -27,6 +27,7 @@ the music with it. Your own `.sf2` files can go in the same folder.
 | Shadow Warrior, SW: Wanton Destruction, SW: Twin Dragon | `/media/fat/games/dnk/jfSW/` | [README.txt](files/games/dnk/jfSW/README.txt) |
 | MIDI Player | `/media/fat/games/dnk/MIDIPlayer/` | [README.txt](files/games/dnk/MIDIPlayer/README.txt) |
 | Screamer, Screamer 2 | `/media/fat/games/dnk/OpenScreamer/` | [README.txt](files/games/dnk/OpenScreamer/README.txt) |
+| Need for Speed SE | `/media/fat/games/dnk/ReNFS/` | [README.txt](files/games/dnk/ReNFS/README.txt) |
 | Half-Life, HL: Opposing Force, HL: Blue Shift | `/media/fat/games/dnk/Xash3D/` | [README.txt](files/games/dnk/Xash3D/README.txt) |
 | Quake II, Q2: The Reckoning, Q2: Ground Zero | `/media/fat/games/dnk/YQuake2/` | [README.txt](files/games/dnk/YQuake2/README.txt) |
 

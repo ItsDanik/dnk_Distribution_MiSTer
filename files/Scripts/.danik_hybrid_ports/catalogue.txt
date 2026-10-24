@@ -26,6 +26,7 @@ jfSW|TD|SW: Twin Dragon
 MIDIPlayer|MIDIPlayer|MIDI Player
 OpenScreamer|S1|Screamer
 OpenScreamer|S2|Screamer 2
+ReNFS|SE|Need for Speed SE
 Xash3D|HL|Half-Life
 Xash3D|OF|HL: Opposing Force
 Xash3D|BS|HL: Blue Shift
