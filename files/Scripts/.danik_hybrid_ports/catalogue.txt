@@ -20,6 +20,12 @@ ECWolf|WL|Wolfenstein 3D
 ECWolf|SOD|Spear of Destiny
 ECWolf|SD2|SoD: Return to Danger
 ECWolf|SD3|SoD: Ultimate Challenge
+EDuke32|DN3D|Duke Nukem 3D
+EDuke32|DC|DN3D: Duke It Out in D.C.
+EDuke32|VACA|DN3D: Life's a Beach
+EDuke32|NW|DN3D: Nuclear Winter
+EDuke32|DZ2|DN3D: Duke!ZONE II
+EDuke32|PP|DN3D: Penthouse Paradise
 jfSW|SW|Shadow Warrior
 jfSW|WT|SW: Wanton Destruction
 jfSW|TD|SW: Twin Dragon

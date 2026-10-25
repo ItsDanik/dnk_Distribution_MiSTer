@@ -4,6 +4,7 @@ CrispyDoom|CrispyDoom_20261025.zip
 Dethrace|Dethrace_20261023.zip
 DXXRebirth|DXXRebirth_20261024.zip
 ECWolf|ECWolf_20261023.zip
+EDuke32|EDuke32_20261025.zip
 jfSW|jfSW_20261023.zip
 MIDIPlayer|MIDIPlayer_20261023.zip
 OpenScreamer|OpenScreamer_20261023.zip
