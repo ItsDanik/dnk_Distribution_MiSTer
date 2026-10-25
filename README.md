@@ -20,6 +20,7 @@ the music with it. Your own `.sf2` files can go in the same folder.
 
 | Games | Your game files go in | Which files |
 |---|---|---|
+| Quake, Quake - Scourge of Armagon, Quake - Dissolution of Eternity | `/media/fat/games/dnk/ChocolateQuake/` | [README.txt](files/games/dnk/ChocolateQuake/README.txt) |
 | Doom, Doom - SIGIL, Doom - SIGIL II, Doom II, Doom II - No Rest for the Living, Doom II - Master Levels, Final Doom - TNT Evilution, Final Doom - Plutonia Experiment, Heretic, Hexen, Hexen - Deathkings, Strife | `/media/fat/games/dnk/CrispyDoom/` | [README.txt](files/games/dnk/CrispyDoom/README.txt) |
 | Carmageddon, Carmageddon: Splat Pack | `/media/fat/games/dnk/Dethrace/` | [README.txt](files/games/dnk/Dethrace/README.txt) |
 | Descent, Descent II | `/media/fat/games/dnk/DXXRebirth/` | [README.txt](files/games/dnk/DXXRebirth/README.txt) |

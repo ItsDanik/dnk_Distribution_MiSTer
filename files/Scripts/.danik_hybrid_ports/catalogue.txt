@@ -1,5 +1,8 @@
 # The games of the ports in the database, for the launcher's screen:
 # <Engine>|<Game>|<title>. Made by launcher/distribution.py of Hybrid_MiSTer.
+ChocolateQuake|QUAKE|Quake
+ChocolateQuake|HIPNOTIC|Quake - Scourge of Armagon
+ChocolateQuake|ROGUE|Quake - Dissolution of Eternity
 CrispyDoom|doom|Doom
 CrispyDoom|sigil|Doom - SIGIL
 CrispyDoom|sigil2|Doom - SIGIL II

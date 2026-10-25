@@ -1,0 +1,3 @@
+QUAKE|Quake
+HIPNOTIC|Quake - Scourge of Armagon
+ROGUE|Quake - Dissolution of Eternity
