@@ -1,0 +1,5 @@
+# The games' details for tty2oled+'s display (hybrid/docs/oled.md):
+# <id>|<year>|<developer>|<description>, printable ASCII
+QUAKE|1996|id Software|A teleporter experiment has opened a gate to another dimension, and an enemy called Quake sends its death squads through. One soldier goes in after it, from military bases to medieval castles and the dark realms behind them. True 3D worlds, fast and brutal combat and a soundtrack by Trent Reznor.
+HIPNOTIC|1997|Hipnotic Interactive|The first mission pack for Quake. Armagon, a general of Quake's armies, readies an invasion from his own fortress, and the soldier crosses three new episodes to stop him. New weapons such as the Laser Cannon and the Mjolnir hammer, new enemies, and machinery that moves as never before in Quake.
+ROGUE|1997|Rogue Entertainment|The second mission pack for Quake. With Quake gone, the Dragon gathers what is left of its armies, and two new episodes lead to him. Lava nails, a plasma gun and multi-rockets, new monsters such as electric eels, mummies and statues that come to life, and a final battle with the Dragon itself.
