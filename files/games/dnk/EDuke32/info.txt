@@ -1,0 +1,8 @@
+# The games' details for tty2oled+'s display (hybrid/docs/oled.md):
+# <id>|<year>|<developer>|<description>, printable ASCII
+DN3D|1996|3D Realms|Aliens have landed in Los Angeles, and they picked the wrong city. Duke kicks, shoots and wisecracks his way through cinemas, shops, a space station and the Moon, in levels full of things to break, switch on and climb into, with a jetpack, pipe bombs and a line for everything.
+DC|1997|Sunstorm Interactive|Duke It Out in D.C.: the aliens have taken the President hostage and overrun Washington. Duke fights through the White House, the museums and the streets of the capital, in a new episode of levels for Duke Nukem 3D.
+VACA|1997|Sunstorm Interactive|Duke Caribbean: Life's a Beach. Duke's holiday on a Caribbean island is spoilt by aliens who have dressed for the beach. Resorts, ships and island villages, with weapons and enemies reworked for sun, sand and surf.
+NW|1997|Simply Silly Software|Duke: Nuclear Winter. The aliens have taken the North Pole and Santa's workshop with it, and Duke is sent to put Christmas right. Snowed-in villages and toy factories, with festive versions of familiar weapons and enemies.
+DZ2|1997|Simply Silly Software|Duke!ZONE II, an add-on authorised by 3D Realms: three new episodes of levels for Duke Nukem 3D, through cities, bases and alien ground.
+PP|1997|Intersphere Communications|Penthouse Paradise, a single level made with Penthouse magazine and given away in 1997: Duke clears the aliens out of a luxury building.
