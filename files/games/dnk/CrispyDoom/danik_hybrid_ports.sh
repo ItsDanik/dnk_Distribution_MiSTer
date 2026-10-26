@@ -58,6 +58,13 @@
 # moved into it. The screen is danik_hybrid_ports_ui, next to this file in
 # .danik_hybrid_ports/; over SSH, or without it, dialog does the same.
 #
+# Where the menu entries go is the player's choice too (version 8, "Menu
+# entries" on the screen): in _Other as dnk-<Game>.mgl, as the ports have
+# always had them (the default, which a player who never chooses keeps), in
+# _Other/_Hybrid Ports/<Game>.mgl, or in _Hybrid Ports/<Game>.mgl, a folder
+# of the main menu (LAYOUTS below). The database has every entry in each
+# layout; the filter takes those of one (see filter_of).
+#
 # For a danik_hybrid_launch.sh:
 #   - it is run with bash in its own session; its output goes to the log below
 #   - MISTER_HYBRID_SET is what was loaded: the set name of the menu entry
@@ -88,7 +95,7 @@
 # under the terms of the GNU General Public License as published by the Free
 # Software Foundation, version 3 of the License.
 
-VERSION=7
+VERSION=8
 SELF=$(readlink -f "$0")
 # DANIK_HYBRID_ROOT and DANIK_HYBRID_TMP: another SD card and /tmp, for testing
 ROOT=${DANIK_HYBRID_ROOT:-/media/fat}
@@ -128,6 +135,15 @@ UI_ARGS=${DANIK_HYBRID_UI_ARGS:-}
 # files, <engine>_<game> for a game's (lower case; Downloader ignores - and
 # _, so these must differ without them).
 CATALOGUE=$ROOT/Scripts/.danik_hybrid_ports/catalogue.txt
+# The layouts of the menu entries, a line each: the name in their tags, what
+# comes before <title>.mgl, the label on the screen, where the menu has them. The same list as
+# LAYOUTS of launcher/distribution.py, which gives an entry of layout L the
+# tags mgl<L>, mgl<L>_<engine> and mgl<L>_<engine>_<game>, and those of the
+# default layout the plain tags as well.
+LAYOUTS="other|_Other/dnk-|Other, as dnk-<Title>|Other
+folder|_Other/_Hybrid Ports/|Other/Hybrid Ports|Other/Hybrid Ports
+root|_Hybrid Ports/|Main menu/Hybrid Ports|Hybrid Ports"
+DEFAULT_LAYOUT=other
 # version 2, which this one takes over from
 OLD_MARK="danik_hybrid_cores.sh"
 OLD_PIDFILE=$TMP/danik_hybrid_cores.pid
@@ -329,14 +345,16 @@ merge_keep() {
 }
 
 # the set names of an engine's menu entries: <setname>s of the MGLs that load
-# _Other/dnk/dnk-<engine>
+# _Other/dnk/dnk-<engine>, in the folder of any layout
 sets_of() {
-    local engine=$1 f
-    for f in "$OTHER"/*.mgl; do
-        [ -f "$f" ] || continue
-        grep -qi "<rbf>_Other/dnk/dnk-$engine</rbf>" "$f" || continue
-        sed -n 's/.*<setname[^>]*>\([^<]*\)<\/setname>.*/\1/p' "$f" | head -n 1
-    done | sort -u
+    local engine=$1 f prefix
+    while IFS='|' read -r _ prefix _; do
+        for f in "$ROOT/${prefix%/*}"/*.mgl; do
+            [ -f "$f" ] || continue
+            grep -qi "<rbf>_Other/dnk/dnk-$engine</rbf>" "$f" || continue
+            sed -n 's/.*<setname[^>]*>\([^<]*\)<\/setname>.*/\1/p' "$f" | head -n 1
+        done
+    done <<< "$LAYOUTS" | sort -u
 }
 
 copy_settings() {
@@ -575,6 +593,8 @@ make_table() {
     { grep -qsF "$CHOSEN" "$DROP_IN" || in_main_ini; } && found=1
     terms=" $(for t in $filter; do norm "$t"; done | tr '\n' ' ') "
     printf 'S\tlauncher\t%d\tLauncher\n' "$(grep -qsF "$MARK" "$STARTUP" && echo 1 || echo 0)"
+    printf 'C\tmenu\t%d\tMenu entries\t%s\n' "$(layout_index "$(layout_of "$terms")")" \
+        "$(echo "$LAYOUTS" | awk -F '|' '{ printf "%s%s", (NR > 1 ? "|" : ""), $3 }')"
     catalogue | tr -d '\r' | while IFS='|' read -r engine game title; do
         [ -n "$engine" ] || continue
         t=0
@@ -589,16 +609,50 @@ make_table() {
     done
 }
 
-# The filter for what is ticked in a table: launcher, and per port its name
-# when all its games are ticked, else the tags of those that are
+# The layout a filter takes, from its terms (normalised, a space around
+# each): the one it has no !mgl<layout> for, else (a filter of before
+# version 8) the default
+layout_of() {
+    local name found= n=0
+    while IFS='|' read -r name _ _; do
+        case "$1" in *" !mgl$name "*) ;; *) found=$name; n=$((n + 1)) ;; esac
+    done <<< "$LAYOUTS"
+    if [ $n -eq 1 ]; then echo "$found"; else echo "$DEFAULT_LAYOUT"; fi
+}
+layout_index() {
+    echo "$LAYOUTS" | awk -F '|' -v l="$1" '$1 == l { print NR - 1 }'
+}
+# the layout chosen in a table; without its line (a screen of before), the
+# filter's
+layout_in() {
+    local i
+    i=$(awk -F '\t' '$1 == "C" && $2 == "menu" { print $3 }' "$1")
+    if [ -n "$i" ]; then
+        echo "$LAYOUTS" | awk -F '|' -v i="$i" 'NR == i + 1 { print $1 }'
+    else
+        layout_of " $(for t in $(section_filter); do norm "$t"; done | tr '\n' ' ') "
+    fi
+}
+
+# The filter for what is ticked in a table: launcher, per port its name when
+# all its games are ticked, else the tags of those that are; each of them
+# again with mgl<layout>_ in front, for the menu entries of the layout
+# chosen; and !mgl<layout> for every other layout. A port's files have its
+# plain tags, and so have the entries of the default layout: the ! terms
+# take those out when another layout is chosen.
 filter_of() {
-    awk -F '\t' '
+    local layout
+    layout=$(layout_in "$1")
+    awk -F '\t' -v l="$layout" -v names="$(echo "$LAYOUTS" | cut -d '|' -f 1 | tr '\n' ' ')" '
+        function add(t) { out = out " " t " mgl" l "_" t }
         $1 == "G" { n[$2]++; if ($4 == 1) { on[$2]++; games[$2] = games[$2] " " tolower($2 "_" $3) } ; if (!($2 in seen)) { seen[$2] = 1; order[++k] = $2 } }
         END {
             out = "launcher"
             for (i = 1; i <= k; i++) { e = order[i]
-                if (on[e] == n[e]) out = out " " tolower(e)
-                else if (on[e] > 0) out = out games[e] }
+                if (on[e] == n[e]) add(tolower(e))
+                else if (on[e] > 0) { m = split(games[e], g, " "); for (j = 1; j <= m; j++) add(g[j]) } }
+            m = split(names, x, " ")
+            for (j = 1; j <= m; j++) if (x[j] != l) out = out " !mgl" x[j]
             print out }' "$1"
 }
 
@@ -623,21 +677,31 @@ choose() {
 }
 
 choose_dialog() {
-    local table=$1 items=() kind key t label picked line
+    local table=$1 items=() choices=() kind key t label picked line i c chosen=
     command -v dialog > /dev/null || { echo "No screen to choose on (no framebuffer, no dialog)."; return 1; }
     while IFS=$'\t' read -r kind key t label rest; do
         case "$kind" in
             S) items+=("S:$key" "$label" "$([ "$t" = 1 ] && echo on || echo off)") ;;
+            C) i=0
+               while IFS= read -r c; do
+                   choices+=("$i" "$c" "$([ "$i" = "$t" ] && echo on || echo off)")
+                   i=$((i + 1))
+               done <<< "$(echo "$rest" | tr '|' '\n')" ;;
             G) items+=("G:$key:$t" "$key: $rest" "$([ "$label" = 1 ] && echo on || echo off)") ;;
         esac
     done < "$table"
     picked=$(dialog --stdout --separate-output --title "Hybrid Ports" \
         --checklist "Space ticks, Enter applies:" 22 70 15 "${items[@]}") || return 1
+    if [ ${#choices[@]} -gt 0 ]; then
+        chosen=$(dialog --stdout --title "Hybrid Ports" \
+            --radiolist "Where the games' menu entries go:" 12 50 3 "${choices[@]}") || return 1
+    fi
     : > "$table.out"
     while IFS=$'\t' read -r kind key t label rest; do
         case "$kind" in
             S) line="S:$key"; t=0; echo "$picked" | grep -qxF "$line" && t=1
                printf 'S\t%s\t%d\t%s\n' "$key" "$t" "$label" >> "$table.out" ;;
+            C) printf 'C\t%s\t%s\t%s\t%s\n' "$key" "${chosen:-$t}" "$label" "$rest" >> "$table.out" ;;
             G) line="G:$key:$t"; label=0; echo "$picked" | grep -qxF "$line" && label=1
                printf 'G\t%s\t%s\t%d\t%s\n' "$key" "$t" "$label" "$rest" >> "$table.out" ;;
         esac
@@ -647,7 +711,11 @@ choose_dialog() {
 # What the player chose: the launcher on or off, the filter written, and
 # Downloader run for it
 apply() {
-    local out=$1 filter updater ui=$TMP/danik_hybrid_ports_ui
+    local out=$1 filter updater ui=$TMP/danik_hybrid_ports_ui was now
+    was=$(layout_of " $(for t in $(section_filter); do norm "$t"; done | tr '\n' ' ') ")
+    now=$(layout_in "$out")
+    # what download says when the menu entries move
+    if [ "$was" != "$now" ]; then export DANIK_HYBRID_MOVED=$now; else unset DANIK_HYBRID_MOVED; fi
     if [ "$(setting_of "$out" launcher)" = 1 ]; then
         register
         start_daemon
@@ -665,7 +733,8 @@ apply() {
     fi
     # shellcheck disable=SC2046  # a word each
     if [ -x "$ui" ] && "$ui" probe $UI_ARGS; then
-        "$ui" run $UI_ARGS -- bash "$SELF" download $(installed_ports; old_ports)
+        "$ui" run $UI_ARGS --done "Load a port from $(echo "$LAYOUTS" | awk -F '|' -v l="$now" '$1 == l { print $4 }')." \
+            -- bash "$SELF" download $(installed_ports; old_ports)
     else
         bash "$SELF" download $(installed_ports; old_ports)
     fi
@@ -704,6 +773,18 @@ download() {
     # the ports look for that folder on a USB drive first (launch scripts of
     # host version 14); the screen cuts lines at 48 columns
     [ -n "$said" ] && echo "on the SD card, or the same on a USB drive."
+    # the menu entries moved (apply says so); favourites, the recent list
+    # and Zaparoo tags know them by their path
+    if [ $code -eq 0 ] && [ -n "${DANIK_HYBRID_MOVED:-}" ]; then
+        echo
+        case "$DANIK_HYBRID_MOVED" in
+            other) echo "The games are in Other again, as dnk-<Title>." ;;
+            folder) echo "The games are now in Other, in Hybrid Ports." ;;
+            root) echo "The games are now in Hybrid Ports, a folder" ; echo "of the main menu." ;;
+        esac
+        echo "Favourites, recent lists and Zaparoo tags of"
+        echo "them point to the old place: make them again."
+    fi
     return $code
 }
 
