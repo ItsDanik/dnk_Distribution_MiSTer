@@ -1,0 +1,5 @@
+# The games' details for tty2oled+'s display (hybrid/docs/oled.md):
+# <id>|<year>|<developer>|<description>, printable ASCII
+HL|1998|Valve|Gordon Freeman, a physicist at the Black Mesa research facility, is late for an experiment that goes badly wrong. Aliens pour in, soldiers come to cover it all up, and he fights his way through the base and beyond, in a story told from the first tram ride on without cut scenes.
+OF|1999|Gearbox Software|Opposing Force tells Black Mesa's story from the other side: Corporal Adrian Shephard, a marine sent to silence the facility, is left behind when his unit falls. New weapons, new aliens and fellow marines to lead.
+BS|2001|Gearbox Software|Blue Shift: Barney Calhoun, one of Black Mesa's security guards, tries to get himself and a group of scientists out of the facility during the same disaster.
