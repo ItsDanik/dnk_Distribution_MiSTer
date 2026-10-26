@@ -1,0 +1,4 @@
+# The games' details for tty2oled+'s display (hybrid/docs/oled.md):
+# <id>|<year>|<developer>|<description>, printable ASCII
+S1|1995|Graffiti|An arcade racer in the spirit of the coin-op greats: fast cars modelled on real ones, tracks through cities, mountains and coastlines, a championship to win against the clock and a field of rivals.
+S2|1996|Milestone|The sequel to Screamer, by the same team, now named Milestone: new tracks across the world, from rally roads through the countryside to city streets, new cars, and a championship and challenges against the clock.
