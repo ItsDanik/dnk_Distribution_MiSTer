@@ -1,0 +1,4 @@
+# The games' details for tty2oled+'s display (hybrid/docs/oled.md):
+# <id>|<year>|<developer>|<description>, printable ASCII
+d1|1995|Parallax Software|The robots of the PTMC's mines have turned on their crews, and a hired pilot flies in to clear them out, from the Moon to Pluto. Six degrees of freedom in winding tunnels: rescue the hostages, destroy each mine's reactor and reach the exit before it blows.
+d2|1996|Parallax Software|The pilot is taken beyond the solar system to mines on alien worlds, where the robots have grown smarter: thieves that steal weapons, and a Guide-Bot that shows the way. New weapons, an afterburner, a headlight, and mines that fall apart as the clock runs down.
