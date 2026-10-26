@@ -11,4 +11,4 @@ MIDIPlayer|MIDIPlayer_20261026.zip
 OpenScreamer|OpenScreamer_20261026.zip
 ReNFS|ReNFS_20261026.zip
 Xash3D|Xash3D_20261026.zip
-YQuake2|YQuake2_20261024.zip
+YQuake2|YQuake2_20261026.zip
