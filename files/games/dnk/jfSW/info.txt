@@ -1,0 +1,5 @@
+# The games' details for tty2oled+'s display (hybrid/docs/oled.md):
+# <id>|<year>|<developer>|<description>, printable ASCII
+SW|1997|3D Realms|Lo Wang, a ninja for hire, turns on his employer, Zilla Enterprises, when he learns what it plans for Japan. A sword, shurikens, a riot gun and a rail gun, vehicles to drive, and enemies from street thugs to giant demons, in Build-engine levels as busy as Duke's and twice as cheeky.
+WT|2005|Sunstorm Interactive|Wanton Destruction: Lo Wang visits his family abroad, and Zilla follows him there. A new campaign finished in 1998 and shelved by its publisher; a copy found years later was released by 3D Realms in 2005.
+TD|1998|Wylde Productions|Twin Dragon: Lo Wang's evil twin brother, Hung Lo, has raised an army of his own. A new campaign given away free in 1998, with new enemies and the twin to face at the end.
