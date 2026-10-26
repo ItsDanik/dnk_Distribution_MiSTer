@@ -9,6 +9,6 @@ EDuke32|EDuke32_20261026.zip
 jfSW|jfSW_20261026.zip
 MIDIPlayer|MIDIPlayer_20261026.zip
 OpenScreamer|OpenScreamer_20261026.zip
-ReNFS|ReNFS_20261025.zip
+ReNFS|ReNFS_20261026.zip
 Xash3D|Xash3D_20261025.zip
 YQuake2|YQuake2_20261024.zip
