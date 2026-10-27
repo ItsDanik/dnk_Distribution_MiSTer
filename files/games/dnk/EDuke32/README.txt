@@ -19,8 +19,10 @@ Game files
                                 addons/vacation
     Nuclear Winter              NWINTER.GRP, next to DUKE3D.GRP or in
                                 addons/nw
-    Duke!ZONE II                DUKEZONE2.GRP (Raze's release) or the GRP
-                                of its CD, next to DUKE3D.GRP
+    Duke!ZONE II                NightFright's release (dukezone2.zip): its
+                                dukezone2 folder as it is, or DUKEZONE2.GRP
+                                next to DUKE3D.GRP; or the GRP of its CD,
+                                next to DUKE3D.GRP
     Penthouse Paradise          PENTHOUS.ZIP, not unpacked, or the GRP of
                                 ZOOM Platform's release, next to DUKE3D.GRP
   They can go on a USB drive instead, in /media/usb0/games/dnk/EDuke32/.
