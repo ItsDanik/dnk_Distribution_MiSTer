@@ -44,6 +44,12 @@
 #        danik_hybrid_ports.sh download <ports>
 #                                         what Apply runs: Downloader, then the
 #                                         folder each new port's game files go in
+#        danik_hybrid_ports.sh table      what the screen shows, as its table
+#        danik_hybrid_ports.sh apply <table>
+#                                         what Apply does with a table of the
+#                                         player's choice, without the screen:
+#                                         the output is the caller's to show
+#                                         (dnkLauncher's ports page, version 9)
 #
 # Choosing the ports: a screen with a tickbox for each port and each of its
 # games the database has (the catalogue below), and the launcher on or off. The ports come
@@ -95,7 +101,7 @@
 # under the terms of the GNU General Public License as published by the Free
 # Software Foundation, version 3 of the License.
 
-VERSION=8
+VERSION=9
 SELF=$(readlink -f "$0")
 # DANIK_HYBRID_ROOT and DANIK_HYBRID_TMP: another SD card and /tmp, for testing
 ROOT=${DANIK_HYBRID_ROOT:-/media/fat}
@@ -519,9 +525,17 @@ run_daemon() {
 
 # ── choosing the ports ──────────────────────────────────────────────
 
-# a tag as Downloader compares them: lower case, without - and _
+# a tag as Downloader compares them: lower case, without - and _. In bash
+# alone: with tr each call took 58ms on the MiSTer, and the table needs one
+# or two a game (it took 5 seconds, 2026-10-27). Tags are ASCII.
 norm() {
-    echo "$1" | tr 'A-Z' 'a-z' | tr -d '_-'
+    local s=${1,,}
+    echo "${s//[_-]/}"
+}
+# the same into the variable $1, without a subshell
+norm_to() {
+    local s=${2,,}
+    printf -v "$1" '%s' "${s//[_-]/}"
 }
 
 # Our section's filter (empty: none, or no filter): the drop-in file's, or
@@ -588,10 +602,14 @@ catalogue() {
 # (either layout).
 CHOSEN="# chosen with danik_hybrid_ports.sh"
 make_table() {
-    local filter terms engine game title t found
+    local filter terms engine game title t found ne ng
     filter=$(section_filter)
     { grep -qsF "$CHOSEN" "$DROP_IN" || in_main_ini; } && found=1
-    terms=" $(for t in $filter; do norm "$t"; done | tr '\n' ' ') "
+    terms=" "
+    for t in $filter; do
+        norm_to t "$t"
+        terms+="$t "
+    done
     printf 'S\tlauncher\t%d\tLauncher\n' "$(grep -qsF "$MARK" "$STARTUP" && echo 1 || echo 0)"
     printf 'C\tmenu\t%d\tMenu entries\t%s\n' "$(layout_index "$(layout_of "$terms")")" \
         "$(echo "$LAYOUTS" | awk -F '|' '{ printf "%s%s", (NR > 1 ? "|" : ""), $3 }')"
@@ -599,8 +617,10 @@ make_table() {
         [ -n "$engine" ] || continue
         t=0
         if [ -n "$found" ]; then
+            norm_to ne "$engine"
+            norm_to ng "${engine}_$game"
             case "$terms" in
-                *" $(norm "$engine") "* | *" $(norm "${engine}_$game") "*) t=1 ;;
+                *" $ne "* | *" $ng "*) t=1 ;;
             esac
         elif [ -f "$DNK/$engine/$LAUNCHER" ] || [ -f "$GAMES/$engine/$LAUNCHER" ]; then
             t=1
@@ -711,7 +731,7 @@ choose_dialog() {
 # What the player chose: the launcher on or off, the filter written, and
 # Downloader run for it
 apply() {
-    local out=$1 filter updater ui=$TMP/danik_hybrid_ports_ui was now
+    local out=$1 filter updater ui=$TMP/danik_hybrid_ports_ui was now code=
     was=$(layout_of " $(for t in $(section_filter); do norm "$t"; done | tr '\n' ' ') ")
     now=$(layout_in "$out")
     # what download says when the menu entries move
@@ -732,15 +752,18 @@ apply() {
         lock_moves wait
     fi
     # shellcheck disable=SC2046  # a word each
-    if [ -x "$ui" ] && "$ui" probe $UI_ARGS; then
+    if [ -z "${NO_SCREEN:-}" ] && [ -x "$ui" ] && "$ui" probe $UI_ARGS; then
         "$ui" run $UI_ARGS --done "Load a port from $(echo "$LAYOUTS" | awk -F '|' -v l="$now" '$1 == l { print $4 }')." \
             -- bash "$SELF" download $(installed_ports; old_ports)
     else
         bash "$SELF" download $(installed_ports; old_ports)
+        code=$?
     fi
     # what came is moved in at once
     migrate_all
     unlock_moves
+    # without the screen, whether Downloader did its work (for the caller)
+    return ${code:-0}
 }
 
 # Downloader for this database alone. Then, for each port it brought that
@@ -924,6 +947,13 @@ main() {
             shift
             download "$@"
             ;;
+        table)
+            make_table
+            ;;
+        apply)
+            [ -f "$2" ] || { echo "usage: $0 apply <table>"; return 1; }
+            NO_SCREEN=1 apply "$2"
+            ;;
         takeover)
             # as the first run, without the screen
             take_over
@@ -937,7 +967,7 @@ main() {
             start_daemon
             ;;
         *)
-            echo "usage: $0 [start|stop|restart|remove|migrate|status|config|takeover]"
+            echo "usage: $0 [start|stop|restart|remove|migrate|status|config|takeover|download|table|apply]"
             return 1
             ;;
     esac
