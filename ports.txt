@@ -4,7 +4,7 @@ ChocolateQuake|ChocolateQuake_20261028.zip
 CrispyDoom|CrispyDoom_20261028.zip
 Dethrace|Dethrace_20261028.zip
 DXXRebirth|DXXRebirth_20261028.zip
-ECWolf|ECWolf_20261026.zip
+ECWolf|ECWolf_20261028.zip
 EDuke32|EDuke32_20261027.zip
 jfSW|jfSW_20261026.zip
 MIDIPlayer|MIDIPlayer_20261026.zip
