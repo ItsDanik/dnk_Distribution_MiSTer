@@ -1,0 +1,3 @@
+# The games' details for tty2oled+'s display (hybrid/docs/oled.md):
+# <id>|<year>|<developer>|<description>, printable ASCII
+ScummVM|2001|The ScummVM Team|ScummVM plays the classic point-and-click adventures of LucasArts, Sierra, Revolution and more, from Monkey Island and Day of the Tentacle to King's Quest and Broken Sword. Add your games in its launcher and play them on the MiSTer's 15kHz screen in their own resolution, with a pad or a mouse.

@@ -36,6 +36,7 @@ MIDIPlayer|MIDIPlayer|MIDI Player
 OpenScreamer|S1|Screamer
 OpenScreamer|S2|Screamer 2
 ReNFS|SE|Need for Speed SE
+ScummVM|ScummVM|ScummVM
 TheForceEngine|DF|Dark Forces
 Xash3D|HL|Half-Life
 Xash3D|OF|HL: Opposing Force
