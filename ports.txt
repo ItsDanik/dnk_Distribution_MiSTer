@@ -7,7 +7,7 @@ DXXRebirth|DXXRebirth_20261028.zip
 ECWolf|ECWolf_20261028.zip
 EDuke32|EDuke32_20261028.zip
 jfSW|jfSW_20261028.zip
-MIDIPlayer|MIDIPlayer_20261026.zip
+MIDIPlayer|MIDIPlayer_20261028.zip
 OpenScreamer|OpenScreamer_20261028.zip
 ReNFS|ReNFS_20261028.zip
 ScummVM|ScummVM_20261028.zip
