@@ -2,7 +2,7 @@
 # Written by launcher/distribution.py of Hybrid_MiSTer.
 ChocolateQuake|ChocolateQuake_20261028.zip
 CrispyDoom|CrispyDoom_20261028.zip
-Dethrace|Dethrace_20261026.zip
+Dethrace|Dethrace_20261028.zip
 DXXRebirth|DXXRebirth_20261028.zip
 ECWolf|ECWolf_20261026.zip
 EDuke32|EDuke32_20261027.zip
