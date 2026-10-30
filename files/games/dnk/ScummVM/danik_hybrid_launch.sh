@@ -70,6 +70,24 @@ export XDG_DATA_HOME="$DATADIR/config"
 # picked before, from the list too).
 GAME=
 RESET=
+# GAME: a game dnkLauncher started (hybrid/docs/dnklauncher.md, "Systems"):
+# its target in /tmp/dnk_scummvm, written just before the core was loaded,
+# taken once. ScummVM plays it and leaves with it (DNK_FROM_LAUNCHER). Not one
+# left from a load that never came (older than a minute), nor one the
+# player's ScummVM no longer has: ScummVM's launcher then, as from its entry.
+TARGET=
+if [ -f /tmp/dnk_scummvm ]; then
+    AGE=$(( $(date +%s) - $(stat -c %Y /tmp/dnk_scummvm) ))
+    [ "$AGE" -ge 0 ] && [ "$AGE" -lt 60 ] && TARGET=$(head -n 1 /tmp/dnk_scummvm | tr -d '\r')
+    rm -f /tmp/dnk_scummvm
+    if [ -n "$TARGET" ] && grep -qxF "[$TARGET]" scummvm.ini 2>/dev/null; then
+        echo "From dnkLauncher: $TARGET" >> "$LOG"
+        export DNK_FROM_LAUNCHER=1
+    else
+        [ -n "$TARGET" ] && echo "From dnkLauncher: $TARGET, not in scummvm.ini" >> "$LOG"
+        TARGET=
+    fi
+fi
 # The game must not outlive us: on SIGTERM it saves its settings and quits
 trap '[ -n "$GAME" ] && kill "$GAME" 2>/dev/null && wait "$GAME"; savelog; exit 0' TERM INT
 while :; do
@@ -78,7 +96,7 @@ while :; do
     # GAME: its command line (where it finds data, settings and saved games:
     # DATADIR, the current folder; what came with the port, libraries the game
     # loads among them: GAMEDIR)
-    nice -n -20 taskset 0x03 "$GAMEDIR/ScummVM" >> "$RUNLOG" 2>&1 &
+    nice -n -20 taskset 0x03 "$GAMEDIR/ScummVM" ${TARGET:+"$TARGET"} >> "$RUNLOG" 2>&1 &
     GAME=$!
     wait "$GAME"
     RC=$?
