@@ -1,0 +1,5 @@
+BLOOD|Blood
+CP|Blood: Cryptic Passage
+RR|Redneck Rampage
+RRRA|Redneck Rampage: Rides Again
+EX|PowerSlave (Exhumed)

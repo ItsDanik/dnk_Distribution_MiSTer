@@ -28,6 +28,7 @@ the music with it. Your own `.sf2` files can go in the same folder.
 | Duke Nukem 3D, DN3D: Duke It Out in D.C., DN3D: Life's a Beach, DN3D: Nuclear Winter, DN3D: Duke!ZONE II, DN3D: Penthouse Paradise | `/media/fat/games/dnk/EDuke32/` | [README.txt](files/games/dnk/EDuke32/README.txt) |
 | Shadow Warrior, SW: Wanton Destruction, SW: Twin Dragon | `/media/fat/games/dnk/jfSW/` | [README.txt](files/games/dnk/jfSW/README.txt) |
 | MIDI Player | `/media/fat/games/dnk/MIDIPlayer/` | [README.txt](files/games/dnk/MIDIPlayer/README.txt) |
+| Blood, Blood: Cryptic Passage, Redneck Rampage, Redneck Rampage: Rides Again, PowerSlave (Exhumed) | `/media/fat/games/dnk/NBloodD/` | [README.txt](files/games/dnk/NBloodD/README.txt) |
 | Screamer, Screamer 2 | `/media/fat/games/dnk/OpenScreamer/` | [README.txt](files/games/dnk/OpenScreamer/README.txt) |
 | Need for Speed SE | `/media/fat/games/dnk/ReNFS/` | [README.txt](files/games/dnk/ReNFS/README.txt) |
 | ScummVM | `/media/fat/games/dnk/ScummVM/` | [README.txt](files/games/dnk/ScummVM/README.txt) |

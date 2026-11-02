@@ -33,6 +33,11 @@ jfSW|SW|Shadow Warrior
 jfSW|WT|SW: Wanton Destruction
 jfSW|TD|SW: Twin Dragon
 MIDIPlayer|MIDIPlayer|MIDI Player
+NBloodD|BLOOD|Blood
+NBloodD|CP|Blood: Cryptic Passage
+NBloodD|RR|Redneck Rampage
+NBloodD|RRRA|Redneck Rampage: Rides Again
+NBloodD|EX|PowerSlave (Exhumed)
 OpenScreamer|S1|Screamer
 OpenScreamer|S2|Screamer 2
 ReNFS|SE|Need for Speed SE

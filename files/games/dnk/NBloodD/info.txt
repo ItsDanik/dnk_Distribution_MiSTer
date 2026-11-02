@@ -1,0 +1,7 @@
+# The games' details for tty2oled+'s display (hybrid/docs/oled.md):
+# <id>|<year>|<developer>|<description>, printable ASCII
+BLOOD|1997|Monolith Productions|Caleb, gunslinger of a dark cult, was betrayed by its god Tchernobog and buried, and in 1928 he climbs out of his grave for revenge. Graveyards, trains, carnivals and mansions full of cultists and zombies, fought with a pitchfork, a flare gun, dynamite, a tommy gun and a voodoo doll.
+CP|1997|Sunstorm Interactive|Cryptic Passage, the official add-on for Blood: Caleb is sent after a sacred scroll and fights his way to it through a new episode of levels, an old opera house and crypts among them, against the same cultists and creatures.
+RR|1997|Xatrix Entertainment|Aliens have landed in Hickston, Arkansas, cloned the locals and stolen Bessie, the prize pig. Leonard and his cousin Bubba take them on through trailer parks, a sawmill and a chicken plant, with a crowbar, a shotgun, dynamite, whiskey and pork rinds.
+RRRA|1998|Xatrix Entertainment|Redneck Rampage Rides Again: Leonard and Bubba crash in the desert by Area 69 and have to get Daisy Mae back from the aliens. New levels from secret bases to casinos and swamps, with new weapons, and a motorcycle and a swamp boat to ride.
+EX|1996|Lobotomy Software|The ancient city of Karnak has been sealed off: an alien race has raised the mummy of Ramses and taken the valley. As a soldier sent in alone, you fight through tombs, temples and canyons, and find the old artifacts that open the way on.

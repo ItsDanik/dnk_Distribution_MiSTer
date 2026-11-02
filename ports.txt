@@ -8,6 +8,7 @@ ECWolf|ECWolf_20261028.zip
 EDuke32|EDuke32_20261101.zip
 jfSW|jfSW_20261028.zip
 MIDIPlayer|MIDIPlayer_20261028.zip
+NBloodD|NBloodD_20261102.zip
 OpenScreamer|OpenScreamer_20261028.zip
 ReNFS|ReNFS_20261028.zip
 ScummVM|ScummVM_20261030.zip
