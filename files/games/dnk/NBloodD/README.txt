@@ -1,5 +1,5 @@
-NBloodD for MiSTer
-==================
+NBlood for MiSTer
+=================
 
 Blood, Cryptic Passage, Redneck Rampage, Redneck Rampage: Rides Again and
 PowerSlave on MiSTer FPGA as a hybrid port.
