@@ -73,6 +73,8 @@
 #
 # For a danik_hybrid_launch.sh:
 #   - it is run with bash in its own session; its output goes to the log below
+#   - the ELF files and scripts next to it have the executable bit (version
+#     10: an NFS share gives none), the ones in its subfolders not
 #   - MISTER_HYBRID_SET is what was loaded: the set name of the menu entry
 #     (ECWolf_SOD), or the engine's name when the core was loaded directly
 #   - on a core switch its whole process group gets SIGTERM, and SIGKILL two
@@ -101,7 +103,7 @@
 # under the terms of the GNU General Public License as published by the Free
 # Software Foundation, version 3 of the License.
 
-VERSION=9
+VERSION=10
 SELF=$(readlink -f "$0")
 # DANIK_HYBRID_ROOT and DANIK_HYBRID_TMP: another SD card and /tmp, for testing
 ROOT=${DANIK_HYBRID_ROOT:-/media/fat}
@@ -204,6 +206,33 @@ launcher_of() {
         LAUNCH=$GAMES/$name/$LAUNCHER
     fi
     [ -n "$LAUNCH" ]
+}
+
+# Gives the programs at the top of a port's folder (its game, mh_message, the
+# copy of the screen: ELF files and scripts) the executable bit they lack.
+# FAT, exFAT and CIFS show every file as executable, but on an NFS share (a
+# player's SD card folders on a NAS, 2026-11-03) the files Downloader writes
+# have no such bit: the launch script, run with bash, could start none of
+# them, and every port went back to the menu a second after its logo. Done at
+# every start, so a program an update has written again gets the bit too; on
+# FAT nothing lacks it, and nothing is read. The libraries deeper in a folder
+# (game.so, Xash3D's dlls) are only loaded, for which reading them is enough.
+make_runnable() {
+    local LC_ALL=C f magic
+    for f in "$1"/*; do
+        [ -f "$f" ] && [ ! -x "$f" ] || continue
+        magic=
+        IFS= read -r -n 4 magic < "$f" 2>/dev/null
+        case "$magic" in
+            $'\x7f'ELF | '#!'*)
+                if chmod a+x "$f" 2>/dev/null; then
+                    log "made ${f#"$ROOT"/} executable"
+                else
+                    log "cannot make ${f#"$ROOT"/} executable: the game cannot start"
+                fi
+                ;;
+        esac
+    done
 }
 
 # VERSION of a copy of this script
@@ -464,6 +493,10 @@ run_daemon() {
 
     echo $$ > "$PIDFILE"
     trap 'stop_child; unlock_moves; rm -f "$PIDFILE"; exit 0' TERM INT
+    # user-startup.sh runs this file itself: on an NFS share the copy
+    # Downloader wrote has no executable bit (see make_runnable), and the
+    # daemon would not start after the next reboot
+    [ -x "$SELF" ] || chmod a+x "$SELF" 2>/dev/null || log "cannot make $SELF executable: user-startup.sh cannot start the daemon"
     [ "$(wc -c < "$LOG" 2>/dev/null || echo 0)" -gt 200000 ] && mv -f "$LOG" "$LOG.prev"
     log "daemon started (version $VERSION, pid $$), ports: $(installed_ports | tr '\n' ' ')$(old_ports | sed 's/^/ (old) /' | tr '\n' ' ')"
     self_stamp=$(stat -c %Y "$SELF" 2>/dev/null)
@@ -488,6 +521,7 @@ run_daemon() {
                 log "$cur loaded: a test, left to tools/test_on_mister.sh"
             elif launcher_of "$cur"; then
                 log "$cur loaded: starting $LAUNCH"
+                make_runnable "$(dirname "$LAUNCH")"
                 MISTER_HYBRID_SET=$cur setsid bash "$LAUNCH" >> "$LOG" 2>&1 < /dev/null &
                 CHILD=$!
             fi
