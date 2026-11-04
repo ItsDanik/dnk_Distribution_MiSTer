@@ -10,8 +10,9 @@ Game files
   Copy your game's whole folder into this folder,
   /media/fat/games/dnk/OpenMotoRacer/, all the files as they are:
     Moto Racer/      GOG's copy, as installed: game.EXE, data, 02.wav to
-                     13.wav (or the 1997 CD's files: DISK1, DATA, its .cue
-                     and .bin)
+                     13.wav (or the 1997 CD's files: DISK1, DATA, and for
+                     its music its .cue and .bin, or its tracks as files,
+                     music/track02.ogg to track13.ogg)
     Moto Racer CD/   the 1997 CD's files, if you have GOG's as well
   With both there GOG's is played. Options, Game Behaviour in the game picks
   which program's ways the game follows, with either copy.
