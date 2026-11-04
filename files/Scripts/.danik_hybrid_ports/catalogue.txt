@@ -38,6 +38,7 @@ NBloodD|CP|Blood: Cryptic Passage
 NBloodD|RR|Redneck Rampage
 NBloodD|RRRA|Redneck Rampage: Rides Again
 NBloodD|EX|PowerSlave (Exhumed)
+OpenMotoRacer|MotoRacer|Moto Racer
 OpenScreamer|S1|Screamer
 OpenScreamer|S2|Screamer 2
 ReNFS|SE|Need for Speed SE

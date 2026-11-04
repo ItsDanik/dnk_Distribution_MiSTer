@@ -29,6 +29,7 @@ the music with it. Your own `.sf2` files can go in the same folder.
 | Shadow Warrior, SW: Wanton Destruction, SW: Twin Dragon | `/media/fat/games/dnk/jfSW/` | [README.txt](files/games/dnk/jfSW/README.txt) |
 | MIDI Player | `/media/fat/games/dnk/MIDIPlayer/` | [README.txt](files/games/dnk/MIDIPlayer/README.txt) |
 | Blood, Blood: Cryptic Passage, Redneck Rampage, Redneck Rampage: Rides Again, PowerSlave (Exhumed) | `/media/fat/games/dnk/NBloodD/` | [README.txt](files/games/dnk/NBloodD/README.txt) |
+| Moto Racer | `/media/fat/games/dnk/OpenMotoRacer/` | [README.txt](files/games/dnk/OpenMotoRacer/README.txt) |
 | Screamer, Screamer 2 | `/media/fat/games/dnk/OpenScreamer/` | [README.txt](files/games/dnk/OpenScreamer/README.txt) |
 | Need for Speed SE | `/media/fat/games/dnk/ReNFS/` | [README.txt](files/games/dnk/ReNFS/README.txt) |
 | ScummVM | `/media/fat/games/dnk/ScummVM/` | [README.txt](files/games/dnk/ScummVM/README.txt) |
